@@ -1,3 +1,9 @@
+function oiJonas(){
+    alert("oi wesley"); 
+}
+function createQuizz(){
+    alert("deu bom:)")
+}
 
 function pegarQuizzesAxios(){
     const promise = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes");
