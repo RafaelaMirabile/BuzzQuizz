@@ -49,14 +49,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-overflow: ellipsis;
+    position: relative;
+    text-align: center;
 }
 h1{
     position: absolute;
     bottom: 0;
-}
-.quizz{
-    position: relative;
-    text-align: center;
+    text-overflow: ellipsis;
 }
 .black-gradient {
     width: 100%;
