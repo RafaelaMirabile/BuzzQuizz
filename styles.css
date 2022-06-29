@@ -171,20 +171,40 @@ input{
 .level-box{
     display: flex;
     flex-direction: column;
-    background-color: aqua;
+    margin-top: 43px;
+    background-color: #FFFFFF;
     width: 600px;
     height: 316px;
 }
 button{
     background-color: #EC362D;
     border-radius: 15px;
+    height: 54px;
     color: #FFF5F4;
     font-size: 21px;
     font-weight: 400;
+    border: none;
+    margin-top: 75px;
 }
-.level-box button{
+.tela-3-3{
+    margin-top: 63px;
+}
+
+.tela-3-3 button{
     width: 324px;
-    height: 54px;
+}
+
+.criarlevel{
+    width: 600px;
+    height: 74px;
+    margin-top: 24px;
+    background-color: #FFFFFF;
+}
+.level p{
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 23px;
+    margin: 27px 0 12px 15px;
 }
 
 .none{
