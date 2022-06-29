@@ -1,8 +1,5 @@
-function oiJonas(){
-    alert("oi wesley"); 
-}
 function createQuizz(){
-    alert("deu bom:)")
+    alert("deu boa:)")
 }
 
 function pegarQuizzesAxios(){
