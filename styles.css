@@ -17,8 +17,6 @@
 .listquizzes{
     width: 1051px;
     background-color: yellow;
-    font-size: 20px;
-    font-weight: 700;
     color: #000000;
     font-family: 'Roboto';
     font-style: normal;
@@ -56,6 +54,12 @@ h1{
     bottom: 0;
     text-overflow: ellipsis;
 }
+h2{
+    font-size: 23px;
+    font-weight: 700;
+    line-height: 27px;
+}
+
 .black-gradient {
     width: 100%;
     height: 100%;
@@ -70,7 +74,7 @@ h1{
     left: 0;
     top: 0;
 }
-.tela-1{
+.tela{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -138,7 +142,24 @@ h1{
     color: #FFFFFF;
     background-color: #ec362d;
 }
-
+.level-box{
+    display: flex;
+    flex-direction: column;
+    background-color: aqua;
+    width: 600px;
+    height: 316px;
+}
+button{
+    background-color: #EC362D;
+    border-radius: 15px;
+    color: #FFF5F4;
+    font-size: 21px;
+    font-weight: 400;
+}
+.level-box button{
+    width: 324px;
+    height: 54px;
+}
 
 .none{
     display: none;
