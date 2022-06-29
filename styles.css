@@ -70,7 +70,7 @@ h1{
     left: 0;
     top: 0;
 }
-.tela-1{
+.tela{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -138,6 +138,23 @@ h1{
     color: #FFFFFF;
     background-color: #ec362d;
 }
+
+.perguntas{
+    width: 600px;
+    height: 256px;
+    display: flex;
+    flex-direction: column;
+    padding: 15px 0;
+    background-color: #FFFFFF;
+}
+input{
+    height: 45px;
+    border-radius: 5px; 
+    margin: 5px 15px;
+    border: 2px solid #D1D1D1;
+    
+}
+
 
 
 .none{
