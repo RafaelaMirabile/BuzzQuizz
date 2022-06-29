@@ -1,5 +1,4 @@
 *{
-    box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
 }
 .topo{
@@ -13,6 +12,7 @@
     justify-content: center;
 }
 .listquizzes{
+    width: 1051px;
     background-color: yellow;
     font-size: 20px;
     font-weight: 700;
@@ -39,4 +39,25 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+.tela-1{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.user{
+    background-color: blueviolet;
+    height: 181px;
+    width: 1051px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 77px;
+}
+.create{
+    background-color:red;
+    height: 20px;
+    width: 80px;
 }
