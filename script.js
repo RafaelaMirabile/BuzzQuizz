@@ -18,5 +18,4 @@ function renderizarTodosOsQuizzes(response){
                                         </div>`
     }
 }
-
 pegarQuizzesAxios();
