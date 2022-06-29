@@ -59,6 +59,9 @@ h2{
     font-weight: 700;
     line-height: 27px;
 }
+.questions h2{
+    margin: 10px 15px;
+}
 
 .black-gradient {
     width: 100%;
@@ -143,11 +146,11 @@ h2{
     background-color: #ec362d;
 }
 
-.perguntas{
+.questions{
     width: 600px;
-    height: 256px;
     display: flex;
     flex-direction: column;
+    margin-bottom: 24px;
     padding: 15px 0;
     background-color: #FFFFFF;
 }
@@ -155,11 +158,16 @@ input{
     height: 45px;
     border-radius: 5px; 
     margin: 5px 15px;
+    padding: 15px;
     border: 2px solid #D1D1D1;
-    
+    outline: none;
+    font-style: italic;
+    font-size: 19px;
 }
 
-
+.tela3-2 button{
+    width: 368px;
+}
 .level-box{
     display: flex;
     flex-direction: column;
