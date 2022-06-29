@@ -16,14 +16,29 @@
     <div class="topo">
         BuzzQuiz
     </div>
-    <div class="tela-1">
+    <div class="tela tela-1">
         <div>
-            <div class="user">
+            <div class="user-empty none">
                 <div>
-                    <h3>Você não criou nenhum quizz ainda :(</h3>
+                    <div class="content">
+                        <div class="advise">
+                            <h3>Você não criou nenhum quizz ainda :(</h3>
+                        </div>
+                        <button class=" create" onclick="createQuizz()">
+                            <p>Criar Quizz</p>
+                        </button>
+                    </div>
                 </div>
-                <button class=" create"></button>
             </div>
+            <div class="user-full">
+                <div class="full">
+                    <div class="userTitle">
+                        <h3>Seus Quizzes</h3>
+                        <h3 class="plus" onclick="createQuizz()">+</h3>
+                    </div>
+                </div>
+            </div>
+        
         </div>
         <div class="listquizzes">
             <span>Todos os Quizzes</span>
