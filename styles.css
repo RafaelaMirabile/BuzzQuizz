@@ -1,3 +1,42 @@
-body{
-    background-color: blue; 
+*{
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+.topo{
+    font-size: 37px;
+    font-weight: 700;
+    color: #FFFFFF;
+    height: 69px;
+    background-color: #EC362D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.listquizzes{
+    background-color: yellow;
+    font-size: 20px;
+    font-weight: 700;
+    color: #000000;
+}
+.quizzes{
+    background-color: green;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    font-size: 19px;
+    font-weight: 400;
+    color: #FFFFFF;
+}
+.quizzes img{
+    width: 340px;
+    height: 181px;
+    border-radius: 5px;
+}
+.quizz{
+    background-color: #EC362D;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
