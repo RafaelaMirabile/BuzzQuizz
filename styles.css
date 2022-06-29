@@ -25,7 +25,6 @@
     font-weight: 700;
     font-size: 20px;
     line-height: 23px;
-    padding-left: 110px;
 }
 .quizzes{
     background-color: green;
@@ -99,6 +98,13 @@
     margin: 0 10px;
     font-size: 20px;
 }
+.user-full{
+    height: 181px;
+    width: 1051px;
+    margin: 75px 0;
+    border-radius: 5px;
+    background-color: #FAFAFA;
+}
 .plus{
     width: 30px;
     height: 30px;
@@ -111,14 +117,6 @@
     color: #FFFFFF;
     background-color: #ec362d;
 }
-.user-full{
-    height: 181px;
-    width: 1051px;
-    margin: 75px 0;
-    border-radius: 5px;
-    background-color: #FAFAFA;
-}
-
 
 
 .none{
