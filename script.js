@@ -62,7 +62,6 @@ function pegarQuizzesAxios(){
     promise.catch(() => console.log("deu ruim"));
 }
 
-//tem um erro rolando sempre que o codigo roda... não sei dizer o pq -Wesley;
 function renderizarTodosOsQuizzes(response){
     todosOsQuizzes = response.data;
 
@@ -76,9 +75,6 @@ function renderizarTodosOsQuizzes(response){
                                         </div>`
     }
 }
-
-
-
 
 
 function createQuizz(){
