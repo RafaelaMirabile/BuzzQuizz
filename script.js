@@ -2,6 +2,12 @@
 let screen = document.querySelector(".screen");
 let userHaveQuizz = false;
 
+let tituloQuizz = "";
+let URLimgQuizz = "";
+let qtdPerguntas = "";
+let qtdNiveis = "";
+
+
 renderizarPagina1();
 
 function renderizarPagina1(){
@@ -86,13 +92,46 @@ function RenderizarPagina3a(){
                 <h2>Comece pelo começo</h2>
             </div>
             <div class="questions ">
-                <input type="text" value="" placeholder="Título do seu quizz">
-                <input type="text" value="" placeholder="URL da imagem do seu quizz">
-                <input type="text" value="" placeholder="Quantidade de perguntas do quizz">
-                <input type="text" value="" placeholder="Quantidade de níveis do quizz">
+                <input class="tituloQuizz" type="text" value="" placeholder="Título do seu quizz">
+                <input class="URLimgQuizz" type="text" value="" placeholder="URL da imagem do seu quizz">
+                <input class="qtdPerguntas" type="text" value="" placeholder="Quantidade de perguntas do quizz">
+                <input class="qtdNiveis" type="text" value="" placeholder="Quantidade de níveis do quizz">
             </div>
-            <button onclick="RenderizarPagina3b()">Prosseguir pra criar perguntas</button>
+            <button onclick="verificaValoresPagina3a()">Prosseguir pra criar perguntas</button>
         </div>`
+    
+}
+function verificaValoresPagina3a(){
+    tituloQuizz = document.querySelector(".tituloQuizz")
+    URLimgQuizz = document.querySelector(".URLimgQuizz")
+    qtdPerguntas = document.querySelector(".qtdPerguntas")
+    qtdNiveis = document.querySelector(".qtdNiveis")
+    tituloQuizz = tituloQuizz.value;
+    URLimgQuizz = URLimgQuizz.value;
+    qtdPerguntas = qtdPerguntas.value;
+    qtdNiveis = qtdNiveis.value;
+    let tituloQuizzOK = tituloQuizz.length >= 20 && tituloQuizz.length <= 65;
+    let URLimgQuizzOK = true;
+    let qtdPerguntasOK = qtdPerguntas > 2 && qtdPerguntas != NaN;
+    let qtdNiveisOK = qtdNiveis >= 2  && qtdNiveis != NaN;
+    
+    if(tituloQuizzOK){
+        if(URLimgQuizzOK){
+            if(qtdPerguntasOK ){
+                if(qtdNiveisOK){
+                    RenderizarPagina3b()
+                }else{
+                    alert("A quantidade de niveis não pode ser menor que 2")
+                }
+            }else{
+                alert("A quantidade de perguntas deve ser de pelo menos 3")
+            }
+        }else{
+            alert("o link da imagem deve estar em formato URL")
+        }
+    }else{
+    alert("O nome do quizz deve ter entre 20 e 65 caracteres");
+    }
 }
 
 function RenderizarPagina3b(){
@@ -143,6 +182,10 @@ function RenderizarPagina3c(){
             </div>
             <button onclick="RenderizarPagina3d()">Finalizar Quizz</button>
         </div>`
+}
+
+function informacoesBasicas(){
+    
 }
 
 function RenderizarPagina3d(){
