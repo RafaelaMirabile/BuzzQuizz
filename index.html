@@ -13,96 +13,13 @@
 </head>
 
 <body>
-
     <div class="topo">
         BuzzQuiz
     </div>
-    <div class="tela tela-1 none">
-        <div>
-            <div class="user-empty">
-                <div>
-                    <div class="content">
-                        <div class="advise">
-                            <h3>Você não criou nenhum quizz ainda :(</h3>
-                        </div>
-                        <button class=" create" onclick="createQuizz()">
-                            <p>Criar Quizz</p>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="user-full none">
-                <div class="full">
-                    <div class="userTitle">
-                        <h3>Seus Quizzes</h3>
-                        <h3 class="plus" onclick="createQuizz()">+</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="listquizzes">
-            <span>Todos os Quizzes</span>
-            <div class="quizzes"> 
-            </div>
-        </div>
+    <div class="screen">
+        
+        
     </div>
-
-    <div class="tela tela-3-1">
-        <div>
-            <h2>Comece pelo começo</h2> 
-        </div>
-        <div class="questions ">
-            <input type="text" value= "" placeholder="Título do seu quizz">
-            <input type="text" value= "" placeholder="URL da imagem do seu quizz">
-            <input type="text" value= "" placeholder="Quantidade de perguntas do quizz">
-            <input type="text" value= "" placeholder="Quantidade de níveis do quizz">
-        </div>
-        <button>Prosseguir pra criar perguntas</button>
-    </div>
-
-
-    <div class="tela tela-3-2">
-        <h2>Crie suas perguntas</h2>
-        <div class="questions ">
-            <h2>Pergunta 1</h2>
-            <input type="text" value= "" placeholder="Texto da pergunta">
-            <input type="text" value= "" placeholder="Cor de fundo da pergunta">
-            <h2>Resposta correta</h2>
-            <input type="text" value= "" placeholder="Resposta correta">
-            <input type="text" value= "" placeholder="URL da imagem">
-            <h2>Respostas incorretas</h2>
-            <input type="text" value= "" placeholder="Resposta incorreta 1">
-            <input type="text" value= "" placeholder="URL da imagem 1">
-            <input type="text" value= "" placeholder="Resposta incorreta 2">
-            <input type="text" value= "" placeholder="URL da imagem 2">
-            <input type="text" value= "" placeholder="Resposta incorreta 3">
-            <input type="text" value= "" placeholder="URL da imagem 3">
-        </div>
-        <div class="questions ">
-            <h2>Pergunta 2</h2>
-        </div>
-        <div class="questions ">
-            <h2>Pergunta 3</h2>
-        </div>
-    </div>
-
-    <div class="tela tela-3-3">
-        <h2>Agora, decida os níveis</h2>
-        <div class="level-box level">
-            <p>Nível 1</p>
-            <input type="text" value="" placeholder="Título do nível">
-            <input type="text" value="" placeholder="% de acerto mínima">
-            <input type="text" value="" placeholder="URL da imagem do nível">
-            <input type="text" value="" placeholder="Descrição do nível">
-        </div>
-        <div class="criarlevel level">
-            <p>Nível 2</p>
-        </div>
-        <div class="criarlevel level">
-            <p>Nível 3</p>
-        </div>
-        <button>Finalizar Quizz</button>
-    </div>   
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="script.js"></script>
 </body>
