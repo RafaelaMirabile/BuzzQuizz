@@ -107,7 +107,7 @@ function verificaValoresPagina3a(){
     qtdPerguntas = qtdPerguntas.value;
     qtdNiveis = qtdNiveis.value;
     let tituloQuizzOK = tituloQuizz.length >= 20 && tituloQuizz.length <= 65;
-    let URLimgQuizzOK = true;
+    let URLimgQuizzOK = URLimgQuizz.includes("http");
     let qtdPerguntasOK = qtdPerguntas > 2 && qtdPerguntas != NaN;
     let qtdNiveisOK = qtdNiveis >= 2  && qtdNiveis != NaN;
     
@@ -123,7 +123,7 @@ function verificaValoresPagina3a(){
                 alert("A quantidade de perguntas deve ser de pelo menos 3")
             }
         }else{
-            alert("o link da imagem deve estar em formato URL")
+            alert("o link da imagem deve estar em formato URL devendo comear com 'http' (dica, abra a imagem numa nova guia e copie o link da pagina)")
         }
     }else{
     alert("O nome do quizz deve ter entre 20 e 65 caracteres");
