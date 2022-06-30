@@ -201,7 +201,7 @@ button{
 
 .criarlevel{
     width: 600px;
-    height: 74px;
+    min-height: 74px;
     margin-top: 24px;
     background-color: #FFFFFF;
 }

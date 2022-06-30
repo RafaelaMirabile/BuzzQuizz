@@ -130,18 +130,26 @@ function RenderizarPagina3c(){
             <h2>Agora, decida os níveis</h2>
             <div class="level-box level">
                 <p>Nível 1</p>
-                <input type="text" value="" placeholder="Título do nível">
-                <input type="text" value="" placeholder="% de acerto mínima">
-                <input type="text" value="" placeholder="URL da imagem do nível">
-                <input type="text" value="" placeholder="Descrição do nível">
+                <input class="títulonível" type="text" value="" placeholder="Título do nível">
+                <input class="porcentagem" type="text" value="" placeholder="% de acerto mínima">
+                <input class="URLnível" type="text" value="" placeholder="URL da imagem do nível">
+                <input class="descnível" type="text" value="" placeholder="Descrição do nível">
             </div>
             <div class="criarlevel level">
                 <p>Nível 2</p>
+                <input class="títulonível" type="text" value="" placeholder="Título do nível">
+                <input class="porcentagem" type="text" value="" placeholder="% de acerto mínima">
+                <input class="URLnível" type="text" value="" placeholder="URL da imagem do nível">
+                <input class="descnível" type="text" value="" placeholder="Descrição do nível">
             </div>
             <div class="criarlevel level">
                 <p>Nível 3</p>
+                <input class="títulonível" type="text" value="" placeholder="Título do nível">
+                <input class="porcentagem" type="text" value="" placeholder="% de acerto mínima">
+                <input class="URLnível" type="text" value="" placeholder="URL da imagem do nível">
+                <input class="descnível" type="text" value="" placeholder="Descrição do nível">
             </div>
-            <button onclick="RenderizarPagina3d()">Finalizar Quizz</button>
+            <button onclick="validarníveis()">Finalizar Quizz</button>
         </div>`
 }
 
@@ -154,6 +162,55 @@ function RenderizarPagina3d(){
             <button onclick="renderizarPagina1()" class="voltar">voltar para home</button>
         </div>` 
 }
+
+//tela-3-3
+// Trocar o 3 pela variável global
+function validarníveis(){
+    const títulosnível = document.querySelectorAll(".títulonível")
+    const porcentagens = document.querySelectorAll(".porcentagem")
+    console.log(porcentagens)
+    const URLsnível = document.querySelectorAll(".URLnível")
+    const descsnível = document.querySelectorAll(".descnível")
+    let achei0 = false
+    let count = 0;
+    let errosníveis = `Verifique os seguintes campos: \n`
+    for (let i = 0; i < 3 ; i++){
+        const títulonível = títulosnível[i].value
+        const porcentagem = porcentagens[i].value
+        const URLnível = URLsnível[i].value
+        const descnível = descsnível[i].value
+        if (títulonível.length >= 10){
+            if (porcentagem !== NaN && porcentagem >= 0 && porcentagem <= 100 && porcentagem !== ""){
+                if (porcentagem === 0){
+                    achei0 = true
+                }
+                if (URLnível){
+                    if (descnível.length >= 30){
+                        count++
+                    } else {
+                        errosníveis += `Descrição do Nivel ${i+1} (No minímio 30 caracteres)\n`
+                    }
+                } else {
+                    errosníveis += `URL da imagem do Nivel ${i+1} (Verifique se está no formato URL)\n`
+                }
+            } else {
+                errosníveis += `Pocentagem do Nivel ${i+1} (Verifique se é um número entre 1 a 100)\n`
+            }
+        } else {
+            errosníveis += `Título do Nivel ${i+1} (No minímio 10 caracteres)\n`
+        }
+    }
+
+    if (count !== 3 || !achei0){
+        if (!achei0){
+            errosníveis += `Pelo menos uma porcentagem deve ser 0)`
+        }
+        alert(errosníveis)
+    } else {
+        RenderizarPagina3d()
+    }
+}
+
 
 
 
