@@ -13,7 +13,6 @@
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 .listquizzes{
-    background-color: yellow;
     color: #000000;
     display: flex;
     flex-direction: column;
@@ -28,7 +27,6 @@
     width: 1051px;
 }
 .quizzes{
-    background-color: green;
     width: 1051px;
     display: flex;
     justify-content: center;
@@ -169,9 +167,17 @@ input{
     font-style: italic;
     font-size: 19px;
 }
+.tela-3-1{
+    padding: 70px 0;
+}
 
-.tela3-2 button{
+.tela-3-2{
+    padding: 70px 0;
+}
+
+.tela-3-2 button{
     width: 368px;
+    
 }
 
 .quest{
@@ -199,11 +205,15 @@ button{
     margin-top: 75px;
 }
 .tela-3-3{
-    margin-top: 63px;
+    
+    padding: 70px 0;
 }
 
 .tela-3-3 button{
     width: 324px;
+}
+.tela-3-4{
+    padding: 70px 0;
 }
 
 .criarlevel{
