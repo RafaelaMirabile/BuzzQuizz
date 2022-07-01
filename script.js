@@ -207,7 +207,6 @@ function RenderizarPagina3d(){
 function validarníveis(){
     const títulosnível = document.querySelectorAll(".títulonível")
     const porcentagens = document.querySelectorAll(".porcentagem")
-    console.log(porcentagens)
     const URLsnível = document.querySelectorAll(".URLnível")
     const descsnível = document.querySelectorAll(".descnível")
     let achei0 = false
@@ -242,7 +241,7 @@ function validarníveis(){
 
     if (count !== 3 || !achei0){
         if (!achei0){
-            errosníveis += `Pelo menos uma porcentagem deve ser 0)`
+            errosníveis += `Pelo menos uma porcentagem deve ser 0`
         }
         alert(errosníveis)
     } else {
