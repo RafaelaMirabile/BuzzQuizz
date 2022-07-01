@@ -4,10 +4,12 @@ let userHaveQuizz = false;
 
 
 
+
 let tituloQuizz = "";
 let URLimgQuizz = "";
 let qtdPerguntas = "";
 let qtdNiveis = "";
+
 
 let títulosnível = [];
 let porcentagens = [];
@@ -218,7 +220,7 @@ function verificaValoresPagina3b(){
         respostaIncorretaC = respostaIncorretaC.value;
         let urlImgIncorretaC = document.querySelector(`.urlImgIncorretaC${i}`);
         urlImgIncorretaC = urlImgIncorretaC.value;
-        //verificação de cada item individualmente
+        //condição de verificação de cada item
         let textPerguntaOK = textPergunta.length >= 20;
         let corPerguntaOK = corPergunta.includes("#") && isHexColor(corPergunta.replace("#",""));
         let respostaCorretaOK = respostaCorreta != "";
@@ -267,7 +269,6 @@ function verificaValoresPagina3b(){
         }else{
             alert(`Texto da pergunta ${i} deve ter 20 caracteres ou mais de`)
         }
-        // griar array com objetos conforme modelo da API
     }
 }
 
@@ -298,23 +299,40 @@ function RenderizarPagina3c(){
                 <input class="URLnível" type="text" value="" placeholder="URL da imagem do nível">
                 <input class="descnível" type="text" value="" placeholder="Descrição do nível">
             </div>
-            <div class="criarlevel level">
-                <p>Nível 2</p>
-                <input class="títulonível" type="text" value="" placeholder="Título do nível">
-                <input class="porcentagem" type="text" value="" placeholder="% de acerto mínima">
-                <input class="URLnível" type="text" value="" placeholder="URL da imagem do nível">
-                <input class="descnível" type="text" value="" placeholder="Descrição do nível">
+            <div class="inserir">
+
             </div>
-            <div class="criarlevel level">
-                <p>Nível 3</p>
-                <input class="títulonível" type="text" value="" placeholder="Título do nível">
-                <input class="porcentagem" type="text" value="" placeholder="% de acerto mínima">
-                <input class="URLnível" type="text" value="" placeholder="URL da imagem do nível">
-                <input class="descnível" type="text" value="" placeholder="Descrição do nível">
-            </div>
+            
             <button onclick="validarníveis()">Finalizar Quizz</button>
-        </div>`
+        </div>`;
+        renderizarLevelBox();
 }
+
+function renderizarLevelBox(){
+    let inserir = document.querySelector(".inserir");
+    for(let i=2; i <= qtdNiveis; i++){
+        inserir.innerHTML +=
+                `<div class="level-box level level${i}">
+                    <div class="quest">
+                        <p>Nível ${i}</p>
+                        <ion-icon onclick="renderizarCriaçãoDeNivel(${i})" name="create-outline"></ion-icon>
+                    </div>
+                </div>`;
+    }
+                
+}
+
+function renderizarCriaçãoDeNivel(x){
+    let level = document.querySelector(`.level${x}`);
+    level.innerHTML = 
+        `<div class="level-box level">
+            <p>Nível ${x}</p>
+            <input class="títulonível" type="text" value="" placeholder="Título do nível">
+            <input class="porcentagem" type="text" value="" placeholder="% de acerto mínima">
+            <input class="URLnível" type="text" value="" placeholder="URL da imagem do nível">
+            <input class="descnível" type="text" value="" placeholder="Descrição do nível">
+        </div>`
+}   
 
 function RenderizarPagina3d(){
     screen.innerHTML = `<div class="tela tela-3-4"> 
@@ -327,7 +345,6 @@ function RenderizarPagina3d(){
 }
 
 //tela-3-3
-// Trocar o 3 pela variável global
 function validarníveis(){
     títulosnível = document.querySelectorAll(".títulonível");
     porcentagens = document.querySelectorAll(".porcentagem");
@@ -336,7 +353,7 @@ function validarníveis(){
     let achei0 = false;
     let count = 0;
     let errosníveis = `Verifique os seguintes campos: \n`;
-    for (let i = 0; i < 3 ; i++){
+    for (let i = 0; i < qtdNiveis ; i++){
         const títulonível = títulosnível[i].value
         const porcentagem = porcentagens[i].value
         let URLnível = URLsnível[i].value
