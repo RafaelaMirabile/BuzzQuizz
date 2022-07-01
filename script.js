@@ -9,6 +9,10 @@ let URLimgQuizz = "";
 let qtdPerguntas = "";
 let qtdNiveis = "";
 
+let títulosnível = [];
+let porcentagens = [];
+let URLsnível = [];
+let descsnível = [];
 
 renderizarPagina1();
 
@@ -325,24 +329,22 @@ function RenderizarPagina3d(){
 //tela-3-3
 // Trocar o 3 pela variável global
 function validarníveis(){
-    const títulosnível = document.querySelectorAll(".títulonível")
-    const porcentagens = document.querySelectorAll(".porcentagem")
-    const URLsnível = document.querySelectorAll(".URLnível")
-    const descsnível = document.querySelectorAll(".descnível")
-    let achei0 = false
+    títulosnível = document.querySelectorAll(".títulonível");
+    porcentagens = document.querySelectorAll(".porcentagem");
+    URLsnível = document.querySelectorAll(".URLnível");
+    descsnível = document.querySelectorAll(".descnível");
+    let achei0 = false;
     let count = 0;
-    let errosníveis = `Verifique os seguintes campos: \n`
+    let errosníveis = `Verifique os seguintes campos: \n`;
     for (let i = 0; i < 3 ; i++){
         const títulonível = títulosnível[i].value
         const porcentagem = porcentagens[i].value
-        const URLnível = URLsnível[i].value
+        let URLnível = URLsnível[i].value
         const descnível = descsnível[i].value
         if (títulonível.length >= 10){
             if (porcentagem !== NaN && porcentagem >= 0 && porcentagem <= 100 && porcentagem !== ""){
-                if (porcentagem === 0){
-                    achei0 = true
-                }
-                if (URLnível){
+                console.log(porcentagem)
+                if (isValidHttpUrl(URLnível)){
                     if (descnível.length >= 30){
                         count++
                     } else {
@@ -357,8 +359,11 @@ function validarníveis(){
         } else {
             errosníveis += `Título do Nivel ${i+1} (No minímio 10 caracteres)\n`
         }
+        if (porcentagem == 0){
+            achei0 = true;
+        }
     }
-
+    console.log(achei0)
     if (count !== 3 || !achei0){
         if (!achei0){
             errosníveis += `Pelo menos uma porcentagem deve ser 0`
