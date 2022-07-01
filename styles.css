@@ -209,8 +209,10 @@ button{
 
 .criarlevel{
     width: 600px;
-    min-height: 74px;
+    height: 316px;
     margin-top: 24px;
+    display: flex;
+    flex-direction: column;
     background-color: #FFFFFF;
 }
 .level p{
