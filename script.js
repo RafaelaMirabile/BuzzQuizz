@@ -1,5 +1,10 @@
 const urlAPI =("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes");
-let respostasEmbaralhadas 
+let respostasEmbaralhadas;
+let respostasNivel = [];
+let questions;
+let escolhida;
+
+
 
 function createQuizz(){
     alert("deu boa:)")
@@ -47,7 +52,7 @@ function playQuizzId(response){
 
     let idQuizz = response.data;
     console.log(idQuizz);
-    let questions = response.data.questions;
+    questions = response.data.questions;
     const quizzQuestions = document.querySelector(".levelContainer");
     console.log(questions);
     let answersBox="";
@@ -55,23 +60,69 @@ function playQuizzId(response){
     for(let i=0; i<questions.length; i++ ){
         //embaralhar respostas //
         let answerArray = questions[i].answers;
+        console.log(answerArray);
         let answerArrayEmbaralhado = answerArray.sort(random);
         // colocar respostas ja embaralhadas//
         for(let j=0 ;j <questions[i].answers.length; j++ ){
 
-            answersBox +=`<div class="answerBox">
-                                        <img src=${questions[i].answers[j].image}" alt="imagem da pergunta">
-                                        <div class="answer">${questions[i].answers[j].text}</div>
-                                    </div>` 
+            answersBox +=`<div class="answerBox" onclick = "guardarRespostas(this,${questions[i].answers[j].isCorrectAnswer})">
+                            <div class="overlay none"></div>                            
+                            <img src=${questions[i].answers[j].image}" alt="imagem da pergunta">
+                            <div class="answer">${questions[i].answers[j].text}</div>
+                        </div>`
+
         }
         // colocar quantidade de questoes//
         quizzQuestions.innerHTML += `<div class="level content">
-        <div class="question content">${questions[i].title}</div>
+        <div class="question content" style="background-color:${questions[i].color}">${questions[i].title}</div>
         <div class="answersContainer">${answersBox}</div>`
         
         answersBox="";
     }
+
 }
 function random() {
     return Math.random() - 0.5;
   }
+
+  // função selecionar as respostas  //
+  function guardarRespostas(clicou , respostaBooleano){
+    console.log(clicou);
+    let option = clicou.parentNode;
+    console.log(option);
+    let alternative = option.querySelectorAll(".answerBox .overlay");
+
+   // colocando overlay//
+    for( let i=0 ; alternative.length > i ; i++){
+        alternative[i].classList.remove("none");
+        clicou.classList.add("overNone");
+    }
+
+    if(respostaBooleano === true){
+        console.log("verdadeiro")
+    } else if (respostaBooleano === false){
+        console.log("falso")
+    }
+
+
+
+
+
+
+
+    }
+
+
+
+
+    
+
+  
+
+
+
+
+
+
+
+  
