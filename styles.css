@@ -198,7 +198,6 @@ button{
     font-weight: 400;
     border: none;
     margin-top: 75px;
-    cursor: pointer;
 }
 .tela-3-3{
     margin-top: 63px;
@@ -226,3 +225,6 @@ ion-icon{
 }
 
 
+[onClick] {
+    cursor:pointer;
+}
