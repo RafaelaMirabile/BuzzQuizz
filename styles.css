@@ -173,6 +173,14 @@ input{
 .tela3-2 button{
     width: 368px;
 }
+
+.quest{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 15px;
+}
+
 .level-box{
     display: flex;
     flex-direction: column;
@@ -190,6 +198,7 @@ button{
     font-weight: 400;
     border: none;
     margin-top: 75px;
+    cursor: pointer;
 }
 .tela-3-3{
     margin-top: 63px;
@@ -212,6 +221,8 @@ button{
     margin: 27px 0 12px 15px;
 }
 
-.none{
-    display: none;
+ion-icon{
+    font-size: 25px;
 }
+
+

@@ -2,6 +2,8 @@
 let screen = document.querySelector(".screen");
 let userHaveQuizz = false;
 
+
+
 let tituloQuizz = "";
 let URLimgQuizz = "";
 let qtdPerguntas = "";
@@ -78,7 +80,6 @@ function renderizarTodosOsQuizzes(response){
 
 
 function createQuizz(){
-    
     RenderizarPagina3a();
 }
 
@@ -104,10 +105,10 @@ function verificaValoresPagina3a(){
     qtdNiveis = document.querySelector(".qtdNiveis")
     tituloQuizz = tituloQuizz.value;
     URLimgQuizz = URLimgQuizz.value;
-    qtdPerguntas = qtdPerguntas.value;
-    qtdNiveis = qtdNiveis.value;
+    qtdPerguntas = Number(qtdPerguntas.value);
+    qtdNiveis = Number(qtdNiveis.value);
     let tituloQuizzOK = tituloQuizz.length >= 20 && tituloQuizz.length <= 65;
-    let URLimgQuizzOK = URLimgQuizz.includes("http");
+    let URLimgQuizzOK = isValidHttpUrl(URLimgQuizz);
     let qtdPerguntasOK = qtdPerguntas > 2 && qtdPerguntas != NaN;
     let qtdNiveisOK = qtdNiveis >= 2  && qtdNiveis != NaN;
     
@@ -136,27 +137,150 @@ function RenderizarPagina3b(){
         <h2>Crie suas perguntas</h2>
         <div class="questions">
             <h2>Pergunta 1</h2>
-            <input type="text" value="" placeholder="Texto da pergunta">
-            <input type="text" value="" placeholder="Cor de fundo da pergunta">
+            <input class="textPergunta1" type="text" value="" placeholder="Texto da pergunta">
+            <input class="corPergunta1" type="text" value="" placeholder="Cor de fundo da pergunta">
             <h2>Resposta correta</h2>
-            <input type="text" value="" placeholder="Resposta correta">
-            <input type="text" value="" placeholder="URL da imagem">
+            <input class="respostaCorreta1" type="text" value="" placeholder="Resposta correta">
+            <input class="urlImgCorreta1" type="text" value="" placeholder="URL da imagem">
             <h2>Respostas incorretas</h2>
-            <input type="text" value="" placeholder="Resposta incorreta 1">
-            <input type="text" value="" placeholder="URL da imagem 1">
-            <input type="text" value="" placeholder="Resposta incorreta 2">
-            <input type="text" value="" placeholder="URL da imagem 2">
-            <input type="text" value="" placeholder="Resposta incorreta 3">
-            <input type="text" value="" placeholder="URL da imagem 3">
+            <input class="respostaIncorretaA1" type="text" value="" placeholder="Resposta incorreta 1">
+            <input class="urlImgIncorretaA1" type="text" value="" placeholder="URL da imagem 1">
+            <input class="respostaIncorretaB1" type="text" value="" placeholder="Resposta incorreta 2">
+            <input class="urlImgIncorretaB1" type="text" value="" placeholder="URL da imagem 2">
+            <input class="respostaIncorretaC1" type="text" value="" placeholder="Resposta incorreta 3">
+            <input class="urlImgIncorretaC1" type="text" value="" placeholder="URL da imagem 3">
         </div>
-        <div class="questions ">
-            <h2>Pergunta 2</h2>
+        <div class="otherQuestions">
         </div>
-        <div class="questions ">
-            <h2>Pergunta 3</h2>
-        </div>
-        <button onclick="RenderizarPagina3c()">Prosseguir pra criar níveis</button>
+       
+        <button onclick="verificaValoresPagina3b()">Prosseguir pra criar níveis</button>
+    </div>`;
+    renderizarPerguntas();
+}
+
+function renderizarPerguntas() {
+    let otherQuestions = document.querySelector(".otherQuestions");
+    otherQuestions.innerHTML = "";
+    for(let i=2; i <= qtdPerguntas; i++){
+        otherQuestions.innerHTML +=  
+            `<div class="questions insert${i}">
+                <div class="quest">
+                    <h2>Pergunta ${i}</h2><ion-icon onclick="pergunta(${i})" name="create-outline"></ion-icon>
+                </div>    
+            </div>`
+    }
+}
+
+function pergunta(x){
+    let div = document.querySelector(`.insert${x}`);
+    div.innerHTML = "";
+    div.innerHTML += 
+    `<div class="questions">
+            <h2>Pergunta ${x}</h2>
+            <input class="textPergunta${x}" type="text" value="" placeholder="Texto da pergunta">
+            <input class="corPergunta${x}" type="text" value="" placeholder="Cor de fundo da pergunta">
+            <h2>Resposta correta</h2>
+            <input class="respostaCorreta${x}" type="text" value="" placeholder="Resposta correta">
+            <input class="urlImgCorreta${x}" type="text" value="" placeholder="URL da imagem">
+            <h2>Respostas incorretas</h2>
+            <input class="respostaIncorretaA${x}" type="text" value="" placeholder="Resposta incorreta 1">
+            <input class="urlImgIncorretaA${x}" type="text" value="" placeholder="URL da imagem 1">
+            <input class="respostaIncorretaB${x}" type="text" value="" placeholder="Resposta incorreta 2">
+            <input class="urlImgIncorretaB${x}" type="text" value="" placeholder="URL da imagem 2">
+            <input class="respostaIncorretaC${x}" type="text" value="" placeholder="Resposta incorreta 3">
+            <input class="urlImgIncorretaC${x}" type="text" value="" placeholder="URL da imagem 3">
     </div>`
+}
+
+function verificaValoresPagina3b(){
+    for(let i = 1; i <= qtdPerguntas; i++){
+        let textPergunta =document.querySelector(`.textPergunta${i}`);
+        textPergunta  = textPergunta.value;
+        let corPergunta = document.querySelector(`.corPergunta${i}`);
+        corPergunta = corPergunta.value;
+        let respostaCorreta = document.querySelector(`.respostaCorreta${i}`);
+        respostaCorreta = respostaCorreta.value;
+        let urlImgCorreta = document.querySelector(`.urlImgCorreta${i}`);
+        urlImgCorreta = urlImgCorreta.value;
+        let respostaIncorretaA = document.querySelector(`.respostaIncorretaA${i}`);
+        respostaIncorretaA = respostaIncorretaA.value;
+        let urlImgIncorretaA = document.querySelector(`.urlImgIncorretaA${i}`);
+        urlImgIncorretaA = urlImgIncorretaA.value;
+        let respostaIncorretaB = document.querySelector(`.respostaIncorretaB${i}`);
+        respostaIncorretaB = respostaIncorretaB.value;
+        let urlImgIncorretaB = document.querySelector(`.urlImgIncorretaB${i}`);
+        urlImgIncorretaB = urlImgIncorretaB.value;
+        let respostaIncorretaC = document.querySelector(`.respostaIncorretaC${i}`);
+        respostaIncorretaC = respostaIncorretaC.value;
+        let urlImgIncorretaC = document.querySelector(`.urlImgIncorretaC${i}`);
+        urlImgIncorretaC = urlImgIncorretaC.value;
+        //verificação de cada item individualmente
+        let textPerguntaOK = textPergunta.length >= 20;
+        let corPerguntaOK = corPergunta.includes("#") && isHexColor(corPergunta.replace("#",""));
+        let respostaCorretaOK = respostaCorreta != "";
+        let urlImgCorretaOK =  isValidHttpUrl(urlImgCorreta);
+        let respostaIncorretaAOK = respostaIncorretaA != "";
+        let urlImgIncorretaAOK =  isValidHttpUrl(urlImgIncorretaA);
+        let urlImgIncorretaBOK = urlImgIncorretaB == "" || isValidHttpUrl(urlImgIncorretaB);
+        let urlImgIncorretaCOK = urlImgIncorretaC == "" || isValidHttpUrl(urlImgIncorretaC);
+        let verificadorDePerguntas = document.querySelectorAll("ion-icon").length;
+
+        if(textPerguntaOK){
+            if(corPerguntaOK){
+                if(respostaCorretaOK){
+                    if(urlImgCorretaOK){
+                        if(respostaIncorretaAOK){
+                            if(urlImgIncorretaAOK){
+                                if(urlImgIncorretaBOK){
+                                    if(urlImgIncorretaCOK){
+                                        if(verificadorDePerguntas === 0 && i === qtdPerguntas){
+                                            RenderizarPagina3c();
+                                        }else{
+                                            if(verificadorDePerguntas+i === qtdPerguntas)
+                                            alert(`preencha a pergunta ${qtdPerguntas + 1 - verificadorDePerguntas}`)
+                                        }
+                                    }else{
+                                        alert(`insira uma url valida para a imagem da resposta incorreta 3  da pergunta ${i}`)
+                                    }
+                                }else{
+                                    alert(`insira uma url valida para a imagem da resposta incorreta 2  da pergunta ${i}`)
+                                }
+                            }else{
+                                alert(`insira uma url valida para a imagem da resposta incorreta 1  da pergunta ${i}`)
+                            }
+                        }else{
+                            alert(`resposta incorreta 1  da pergunta ${i} deve ser preenchida`)
+                        }
+                    }else{
+                        alert("insira uma url valida para a imagem da resposta correta")
+                    } 
+                }else{
+                    alert("Textos da resposta correta não pode estar vazio")
+                }
+            }else{
+                alert(`Cor de fundo da pergunta ${i} deve ser uma cor em hexadecimal (começar em '#', seguida de 6 caracteres hexadecimais, ou seja, números ou letras de A a F)`)
+            }
+        }else{
+            alert(`Texto da pergunta ${i} deve ter 20 caracteres ou mais de`)
+        }
+        // griar array com objetos conforme modelo da API
+    }
+}
+
+function isHexColor (hex) {
+    return typeof hex === 'string'
+        && hex.length === 6
+        && !isNaN(Number('0x' + hex))
+}
+
+function isValidHttpUrl(string) {
+    let url;   
+    try {
+      url = new URL(string);
+    } catch (_) {
+      return false;  
+    }
+    return url.protocol === "http:" || url.protocol === "https:";
 }
 
 function RenderizarPagina3c(){
@@ -186,10 +310,6 @@ function RenderizarPagina3c(){
             </div>
             <button onclick="validarníveis()">Finalizar Quizz</button>
         </div>`
-}
-
-function informacoesBasicas(){
-    
 }
 
 function RenderizarPagina3d(){
@@ -248,8 +368,3 @@ function validarníveis(){
         RenderizarPagina3d()
     }
 }
-
-
-
-
-
