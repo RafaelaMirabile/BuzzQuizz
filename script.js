@@ -10,17 +10,18 @@ let escolhida;
 let answerArray=[];
 let answersBox="";
 
+let quizzCriado = {};
 
 let tituloQuizz = "";
 let URLimgQuizz = "";
 let qtdPerguntas = "";
 let qtdNiveis = "";
 
-
 let títulosnível = [];
 let porcentagens = [];
 let URLsnível = [];
 let descsnível = [];
+
 
 renderizarPagina1();
 
@@ -106,9 +107,6 @@ pegarQuizzesAxios();
 function playQuizz(id){
     const promise = axios.get(`${urlAPI}/${id}`);
     promise.then(playQuizzId);
-
-    const tela1 = document.querySelector(".tela-1");
-    const tela3 = document.querySelector(".tela-3");
 }
 
 //Função renderizar QuizzClicado//
@@ -157,6 +155,7 @@ function playQuizzId(response){
         answersBox="";
     }
 }
+
 function random() {
     return Math.random() - 0.5;
   }
@@ -315,6 +314,8 @@ function pergunta(x){
 }
 
 function verificaValoresPagina3b(){
+    quizzCriado = {title: tituloQuizz, image: URLimgQuizz, questions:[], levels:[]};  
+    
     for(let i = 1; i <= qtdPerguntas; i++){
         let textPergunta =document.querySelector(`.textPergunta${i}`);
         textPergunta  = textPergunta.value;
@@ -347,6 +348,30 @@ function verificaValoresPagina3b(){
         let urlImgIncorretaCOK = urlImgIncorretaC == "" || isValidHttpUrl(urlImgIncorretaC);
         let verificadorDePerguntas = document.querySelectorAll("ion-icon").length;
 
+         // criação do objeto 'quizzCriado'
+
+        let resposta = []
+
+        let obj1 = { text: respostaCorreta, image: urlImgCorreta, isCorrectAnswer: true };
+        resposta.push(obj1);
+
+        let obj2 = { text: respostaIncorretaA, image: urlImgIncorretaA, isCorrectAnswer: false };
+        resposta.push(obj2);
+
+        if (respostaIncorretaB != "" && urlImgIncorretaB != "") {
+
+            let obj3 = { text: respostaIncorretaB, image: urlImgIncorretaB, isCorrectAnswer: false };
+            resposta.push(obj3);
+            if (respostaIncorretaC != "" && urlImgIncorretaC != "") {
+
+                let obj4 = { text: respostaIncorretaC, image: urlImgIncorretaC, isCorrectAnswer: false };
+                resposta.push(obj4);
+            }
+        }   
+
+        quizzCriado.questions.push({title: textPergunta, color: corPergunta, answers: resposta})          
+
+        //verificação de cada item
         if(textPerguntaOK){
             if(corPerguntaOK){
                 if(respostaCorretaOK){
@@ -356,7 +381,9 @@ function verificaValoresPagina3b(){
                                 if(urlImgIncorretaBOK){
                                     if(urlImgIncorretaCOK){
                                         if(verificadorDePerguntas === 0 && i === qtdPerguntas){
-                                            RenderizarPagina3c();
+
+                                            RenderizarPagina3c();                           
+                                            
                                         }else{
                                             if(verificadorDePerguntas+i === qtdPerguntas)
                                             alert(`preencha a pergunta ${qtdPerguntas + 1 - verificadorDePerguntas}`)
@@ -374,10 +401,10 @@ function verificaValoresPagina3b(){
                             alert(`resposta incorreta 1  da pergunta ${i} deve ser preenchida`)
                         }
                     }else{
-                        alert("insira uma url valida para a imagem da resposta correta")
+                        alert(`insira uma url valida para a imagem da resposta correta da pergunta ${i}`)
                     } 
                 }else{
-                    alert("Textos da resposta correta não pode estar vazio")
+                    alert(`Textos da resposta correta da pergunta ${i} não pode estar vazio`)
                 }
             }else{
                 alert(`Cor de fundo da pergunta ${i} deve ser uma cor em hexadecimal (começar em '#', seguida de 6 caracteres hexadecimais, ou seja, números ou letras de A a F)`)
@@ -386,6 +413,7 @@ function verificaValoresPagina3b(){
             alert(`Texto da pergunta ${i} deve ter 20 caracteres ou mais de`)
         }
     }
+    
 }
 
 function isHexColor (hex) {
@@ -455,7 +483,7 @@ function RenderizarPagina3d(){
             <h2>Seu quizz está pronto!</h2>
             
             
-            <button>Acessar Quizz</button>
+            <button onclick="renderizarTela2QuizzCriado(quizzCriado)()">Acessar Quizz</button>
             <button onclick="renderizarPagina1()" class="voltar">voltar para home</button>
         </div>` 
 }
@@ -476,7 +504,6 @@ function validarníveis(){
         const descnível = descsnível[i].value
         if (títulonível.length >= 10){
             if (porcentagem !== NaN && porcentagem >= 0 && porcentagem <= 100 && porcentagem !== ""){
-                console.log(porcentagem)
                 if (isValidHttpUrl(URLnível)){
                     if (descnível.length >= 30){
                         count++
@@ -496,13 +523,76 @@ function validarníveis(){
             achei0 = true;
         }
     }
-    console.log(achei0)
     if (count !== qtdNiveis || !achei0){
         if (!achei0){
             errosníveis += `Pelo menos uma porcentagem deve ser 0`
         }
         alert(errosníveis)
     } else {
+        for(let j = 0; j <= qtdNiveis - 1; j++){
+            quizzCriado.levels.push({title: títulosnível[j].value , image: URLsnível[j].value , text: descsnível[j].value, minValue: porcentagens[j].value})
+        }
+        console.log(quizzCriado)
         RenderizarPagina3d()
     }
 }
+
+function renderizarTela2QuizzCriado(objeto){
+    screen.innerHTML = "";
+
+    screen.innerHTML = `<div class="tela tela-2">
+    <div class="banner"> </div>
+ <div class="levelContainer content"> </div>          
+</div>`;
+    playQuizzCriado(objeto)
+}
+
+
+function playQuizzCriado(response){
+
+    const bannerQuizz = document.querySelector(".banner");
+    bannerQuizz.innerHTML += `<div class="black-gradient"></div> 
+                              <img src="${response.image}" alt="imagem do quizz clicado">
+                              <h2>${response.title}</h2>`
+
+    let idQuizz = response;
+    console.log(idQuizz);
+    questions = response.questions;
+    const quizzQuestions = document.querySelector(".levelContainer");
+    console.log(questions);
+
+    
+    for(let i=0; i<questions.length; i++ ){
+        //embaralhar respostas //
+        answerArray = questions[i].answers;
+        console.log(answerArray);
+        let answerArrayEmbaralhado = answerArray.sort(random);
+        // colocar respostas ja embaralhadas//
+        for(let j=0 ;j <questions[i].answers.length; j++ ){
+            if(questions[i].answers[j].isCorrectAnswer === true){
+                answersBox +=`<div class="answerBox green scroll${i}" onclick = "guardarRespostas(this, ${i})"}>
+                <div class="overlay none"></div>                            
+                <img src=${questions[i].answers[j].image}" alt="imagem da pergunta">
+                <div class="answer">${questions[i].answers[j].text}</div>
+            </div>`
+
+            } else {
+                answersBox +=`<div class="answerBox red scroll${i}" onclick = "guardarRespostas(this, ${i})"}>
+                <div class="overlay none"></div>                            
+                <img src=${questions[i].answers[j].image}" alt="imagem da pergunta">
+                <div class="answer">${questions[i].answers[j].text}</div>
+            </div>`
+            }
+  
+        }
+        // colocar quantidade de questoes//
+        quizzQuestions.innerHTML += `<div class="questionBox2 content">
+        <div class="question content" style="background-color:${questions[i].color}">${questions[i].title}</div>
+        <div class="answersContainer">${answersBox}</div>`
+        
+        answersBox="";
+    }
+}
+
+
+
