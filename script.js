@@ -2,7 +2,13 @@
 let screen = document.querySelector(".screen");
 let userHaveQuizz = false;
 
-
+const urlAPI =("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes");
+let respostasEmbaralhadas;
+let respostasArray = [];
+let questions;
+let escolhida;
+let answerArray=[];
+let answersBox="";
 
 
 let tituloQuizz = "";
@@ -65,7 +71,7 @@ function renderizarListQuizzes(){
 }
 
 function pegarQuizzesAxios(){
-    const promise = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes");
+    const promise = axios.get(urlAPI);
     promise.then(renderizarTodosOsQuizzes);
     promise.catch(() => console.log("deu ruim"));
 }
@@ -76,12 +82,122 @@ function renderizarTodosOsQuizzes(response){
     const listadeTodosOsQuizzes = document.querySelector(".quizzes");
 
     for( i=0; todosOsQuizzes.length > i; i++ ){
-        listadeTodosOsQuizzes.innerHTML += `<div class="quizz" onclick="playQuizz(${todosOsQuizzes[i].id})">
+        listadeTodosOsQuizzes.innerHTML += `<div class="quizz" onclick="renderizarTela2(${todosOsQuizzes[i].id})">
                                             <div class="black-gradient"></div> 
                                             <img src="${todosOsQuizzes[i].image}">
                                             <h1>${todosOsQuizzes[i].title}</h1>
                                         </div>`
     }
+}
+
+function renderizarTela2(quizzClicado){
+    screen.innerHTML = "";
+
+    screen.innerHTML = `<div class="tela tela-2">
+    <div class="banner"> </div>
+ <div class="levelContainer content"> </div>          
+</div>`;
+    playQuizz(quizzClicado)
+}
+
+pegarQuizzesAxios();
+
+// função get API QUIZZ ID e muda da tela 1 para 2 // 
+function playQuizz(id){
+    const promise = axios.get(`${urlAPI}/${id}`);
+    promise.then(playQuizzId);
+
+    const tela1 = document.querySelector(".tela-1");
+    const tela3 = document.querySelector(".tela-3");
+}
+
+//Função renderizar QuizzClicado//
+function playQuizzId(response){
+
+    const bannerQuizz = document.querySelector(".banner");
+    bannerQuizz.innerHTML += `<div class="black-gradient"></div> 
+                              <img src="${response.data.image}" alt="imagem do quizz clicado">
+                              <h2>${response.data.title}</h2>`
+
+    let idQuizz = response.data;
+    console.log(idQuizz);
+    questions = response.data.questions;
+    const quizzQuestions = document.querySelector(".levelContainer");
+    console.log(questions);
+
+    
+    for(let i=0; i<questions.length; i++ ){
+        //embaralhar respostas //
+        answerArray = questions[i].answers;
+        console.log(answerArray);
+        let answerArrayEmbaralhado = answerArray.sort(random);
+        // colocar respostas ja embaralhadas//
+        for(let j=0 ;j <questions[i].answers.length; j++ ){
+            if(questions[i].answers[j].isCorrectAnswer === true){
+                answersBox +=`<div class="answerBox green scroll${i}" onclick = "guardarRespostas(this, ${i})"}>
+                <div class="overlay none"></div>                            
+                <img src=${questions[i].answers[j].image}" alt="imagem da pergunta">
+                <div class="answer">${questions[i].answers[j].text}</div>
+            </div>`
+
+            } else {
+                answersBox +=`<div class="answerBox red scroll${i}" onclick = "guardarRespostas(this, ${i})"}>
+                <div class="overlay none"></div>                            
+                <img src=${questions[i].answers[j].image}" alt="imagem da pergunta">
+                <div class="answer">${questions[i].answers[j].text}</div>
+            </div>`
+            }
+  
+        }
+        // colocar quantidade de questoes//
+        quizzQuestions.innerHTML += `<div class="questionBox2 content">
+        <div class="question content" style="background-color:${questions[i].color}">${questions[i].title}</div>
+        <div class="answersContainer">${answersBox}</div>`
+        
+        answersBox="";
+    }
+}
+function random() {
+    return Math.random() - 0.5;
+  }
+
+  // função selecionar as respostas  //
+  function guardarRespostas(clicou,x){
+
+    console.log(clicou);
+    let option = clicou.parentNode;
+    console.log(option);
+    let alternative = option.querySelectorAll(".answerBox .overlay");
+    let alternativeColor = option.querySelectorAll(".answerBox");
+    console.log(alternativeColor);
+
+   // colocando overlay//
+    for( let i=0 ; alternative.length > i ; i++){
+        alternative[i].classList.remove("none");
+        clicou.classList.add("overNone");
+    }
+   //colocanod cor da letra//
+   for(let i =0 ; alternativeColor.length > i; i++){
+    alternativeColor[i].classList.add("selecionado");
+   }
+   if(clicou.classList.contains("red")){
+    respostasArray.push("red");
+   } else if(clicou.classList.contains("green")){
+    respostasArray.push("green");
+   }
+
+   console.log(respostasArray);
+
+
+  setTimeout(scroll(x), 2000);
+}
+function scroll(x){
+    let rolar = document.querySelector(`.scroll${x+1}`);
+    rolar.scrollIntoView({
+        behavior: 'auto',
+        block: 'center',
+        inline: 'center'
+    });
 }
 
 
