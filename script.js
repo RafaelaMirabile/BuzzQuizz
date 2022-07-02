@@ -91,7 +91,6 @@ function renderizarTodosOsQuizzes(response){
     }
 }
 
-
 function renderizarTela2(quizzClicado){
     screen.innerHTML = "";
 
@@ -157,7 +156,6 @@ function playQuizzId(response){
         
         answersBox="";
     }
-
 }
 function random() {
     return Math.random() - 0.5;
