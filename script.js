@@ -88,7 +88,6 @@ function renderizarTodosOsQuizzes(response){
     }
 }
 
-
 function renderizarTela2(quizzClicado){
     screen.innerHTML = "";
 
@@ -146,7 +145,6 @@ function playQuizzId(response){
         
         answersBox="";
     }
-
 }
 function random() {
     return Math.random() - 0.5;
@@ -169,6 +167,16 @@ function random() {
         console.log("verdadeiro")
     } else if (respostaBooleano === false){
         console.log("falso")
+    }
+
+    //colocanod cor da letra//
+    for(let i=0 ; i< alternativeColor.length ; i++){
+        if(respostaBooleano === true){
+            clicou.classList.add("green");
+            } else if (respostaBooleano === false){
+            clicou.classList.add("red");
+            }
+
     }
     }
 
