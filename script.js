@@ -4,9 +4,11 @@ let userHaveQuizz = false;
 
 const urlAPI =("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes");
 let respostasEmbaralhadas;
-let respostasNivel = [];
+let respostasArray = [];
 let questions;
 let escolhida;
+let answerArray=[];
+let answersBox="";
 
 
 let tituloQuizz = "";
@@ -122,21 +124,30 @@ function playQuizzId(response){
     questions = response.data.questions;
     const quizzQuestions = document.querySelector(".levelContainer");
     console.log(questions);
-    let answersBox="";
+
     
     for(let i=0; i<questions.length; i++ ){
         //embaralhar respostas //
-        let answerArray = questions[i].answers;
+        answerArray = questions[i].answers;
         console.log(answerArray);
         let answerArrayEmbaralhado = answerArray.sort(random);
         // colocar respostas ja embaralhadas//
         for(let j=0 ;j <questions[i].answers.length; j++ ){
+            if(questions[i].answers[j].isCorrectAnswer === true){
+                answersBox +=`<div class="answerBox green scroll${i}" onclick = "guardarRespostas(this, ${i})"}>
+                <div class="overlay none"></div>                            
+                <img src=${questions[i].answers[j].image}" alt="imagem da pergunta">
+                <div class="answer">${questions[i].answers[j].text}</div>
+            </div>`
 
-            answersBox +=`<div class="answerBox" onclick = "guardarRespostas(this,${questions[i].answers[j].isCorrectAnswer})">
-                            <div class="overlay none"></div>                            
-                            <img src=${questions[i].answers[j].image}" alt="imagem da pergunta">
-                            <div class="answer">${questions[i].answers[j].text}</div>
-                        </div>`
+            } else {
+                answersBox +=`<div class="answerBox red scroll${i}" onclick = "guardarRespostas(this, ${i})"}>
+                <div class="overlay none"></div>                            
+                <img src=${questions[i].answers[j].image}" alt="imagem da pergunta">
+                <div class="answer">${questions[i].answers[j].text}</div>
+            </div>`
+            }
+  
         }
         // colocar quantidade de questoes//
         quizzQuestions.innerHTML += `<div class="questionBox2 content">
@@ -151,34 +162,43 @@ function random() {
   }
 
   // função selecionar as respostas  //
-  function guardarRespostas(clicou , respostaBooleano){
+  function guardarRespostas(clicou,x){
+
     console.log(clicou);
     let option = clicou.parentNode;
     console.log(option);
     let alternative = option.querySelectorAll(".answerBox .overlay");
+    let alternativeColor = option.querySelectorAll(".answerBox");
+    console.log(alternativeColor);
 
    // colocando overlay//
     for( let i=0 ; alternative.length > i ; i++){
         alternative[i].classList.remove("none");
         clicou.classList.add("overNone");
     }
+   //colocanod cor da letra//
+   for(let i =0 ; alternativeColor.length > i; i++){
+    alternativeColor[i].classList.add("selecionado");
+   }
+   if(clicou.classList.contains("red")){
+    respostasArray.push("red");
+   } else if(clicou.classList.contains("green")){
+    respostasArray.push("green");
+   }
 
-    if(respostaBooleano === true){
-        console.log("verdadeiro")
-    } else if (respostaBooleano === false){
-        console.log("falso")
-    }
+   console.log(respostasArray);
 
-    //colocanod cor da letra//
-    for(let i=0 ; i< alternativeColor.length ; i++){
-        if(respostaBooleano === true){
-            clicou.classList.add("green");
-            } else if (respostaBooleano === false){
-            clicou.classList.add("red");
-            }
 
-    }
-    }
+  setTimeout(scroll(x), 2000);
+}
+function scroll(x){
+    let rolar = document.querySelector(`.scroll${x+1}`);
+    rolar.scrollIntoView({
+        behavior: 'auto',
+        block: 'center',
+        inline: 'center'
+    });
+}
 
 
 function createQuizz(){
