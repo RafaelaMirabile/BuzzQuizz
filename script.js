@@ -1,20 +1,12 @@
-<<<<<<< HEAD
+//tela:
+let screen = document.querySelector(".screen");
+let userHaveQuizz = false;
+
 const urlAPI =("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes");
 let respostasEmbaralhadas;
 let respostasNivel = [];
 let questions;
 let escolhida;
-
-
-
-function createQuizz(){
-    alert("deu boa:)")
-=======
-//tela:
-let screen = document.querySelector(".screen");
-let userHaveQuizz = false;
-
-
 
 
 let tituloQuizz = "";
@@ -74,7 +66,6 @@ function renderizarListQuizzes(){
         </div>
     </div>`
     pegarQuizzesAxios();
->>>>>>> de075feaa76c29be331a14388e0155c84b135eee
 }
 
 function pegarQuizzesAxios(){
@@ -89,14 +80,27 @@ function renderizarTodosOsQuizzes(response){
     const listadeTodosOsQuizzes = document.querySelector(".quizzes");
 
     for( i=0; todosOsQuizzes.length > i; i++ ){
-        listadeTodosOsQuizzes.innerHTML += `<div class="quizz" onclick="playQuizz(${todosOsQuizzes[i].id})">
+        listadeTodosOsQuizzes.innerHTML += `<div class="quizz" onclick="renderizarTela2(${todosOsQuizzes[i].id})">
                                             <div class="black-gradient"></div> 
                                             <img src="${todosOsQuizzes[i].image}">
                                             <h1>${todosOsQuizzes[i].title}</h1>
                                         </div>`
     }
 }
+
+
+function renderizarTela2(quizzClicado){
+    screen.innerHTML = "";
+
+    screen.innerHTML = `<div class="tela tela-2">
+    <div class="banner"> </div>
+ <div class="levelContainer content"> </div>          
+</div>`;
+    playQuizz(quizzClicado)
+}
+
 pegarQuizzesAxios();
+
 // função get API QUIZZ ID e muda da tela 1 para 2 // 
 function playQuizz(id){
     const promise = axios.get(`${urlAPI}/${id}`);
@@ -104,11 +108,8 @@ function playQuizz(id){
 
     const tela1 = document.querySelector(".tela-1");
     const tela3 = document.querySelector(".tela-3");
-
-    tela1.classList.add("none");
-    tela3.classList.add("none");
-
 }
+
 //Função renderizar QuizzClicado//
 function playQuizzId(response){
 
@@ -137,10 +138,9 @@ function playQuizzId(response){
                             <img src=${questions[i].answers[j].image}" alt="imagem da pergunta">
                             <div class="answer">${questions[i].answers[j].text}</div>
                         </div>`
-
         }
         // colocar quantidade de questoes//
-        quizzQuestions.innerHTML += `<div class="level content">
+        quizzQuestions.innerHTML += `<div class="questionBox2 content">
         <div class="question content" style="background-color:${questions[i].color}">${questions[i].title}</div>
         <div class="answersContainer">${answersBox}</div>`
         
@@ -170,29 +170,7 @@ function random() {
     } else if (respostaBooleano === false){
         console.log("falso")
     }
-
-
-
-
-
-
-
     }
-
-
-
-
-    
-
-  
-
-
-
-
-
-
-
-  
 
 
 function createQuizz(){
@@ -491,7 +469,7 @@ function validarníveis(){
         }
     }
     console.log(achei0)
-    if (count !== 3 || !achei0){
+    if (count !== qtdNiveis || !achei0){
         if (!achei0){
             errosníveis += `Pelo menos uma porcentagem deve ser 0`
         }

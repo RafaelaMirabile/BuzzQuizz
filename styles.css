@@ -184,7 +184,7 @@ font-size: 39px;
 line-height: 46px;
 color: #FFFFFF;
 }
-.level{
+.questionBox2{
     padding: 20px;
     width: 759px; 
     border: 2px solid green;
@@ -304,6 +304,7 @@ button{
     flex-direction: column;
     background-color: #FFFFFF;
 }
+
 .level p{
     font-size: 20px;
     font-weight: 700;
@@ -315,7 +316,10 @@ ion-icon{
     font-size: 25px;
 }
 
-
 [onClick] {
     cursor:pointer;
+}
+
+.none{
+    display: none;
 }
