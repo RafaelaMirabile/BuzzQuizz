@@ -214,8 +214,10 @@ function calcularNivel(){
         if(respostasArray[i] === "green"){
             count ++
         }
-        console.log(count);
     } 
+    let porcentdojogador = Math.round((count/ respostasArray.length)*100);
+    console.log(respostasArray.length);
+    console.log(porcentdojogador);
 
 console.log(idQuizz);
 let arrayLevels = idQuizz.levels;
@@ -225,6 +227,7 @@ for (let i = 0 ; arrayLevels.length > i ; i++){
 minValueArray.push(arrayLevels[i].minValue);
 }
 console.log(minValueArray);
+console.log(minValueArray.sort())
 }
 
 
