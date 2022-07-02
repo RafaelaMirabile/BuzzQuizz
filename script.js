@@ -268,10 +268,11 @@ function exibiçãoDoNivel(){
                             <div class = "porcentagemTxt"><h4>${porcentagemTexto}<h4></div>
                             </div>
                             <div class = "reiniciarQuizz">
-                            <button>Reiniciar Quizz</button>
+                            <button  >Reiniciar Quizz</button>
                             <h5> Voltar para Home</h5>
                             <div/>
                         </div>`
+    respostasArray =[];                    
 }
 
 function createQuizz(){
