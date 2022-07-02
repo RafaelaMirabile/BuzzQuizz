@@ -9,6 +9,13 @@ let questions;
 let escolhida;
 let answerArray=[];
 let answersBox="";
+let idQuizz;
+let porcentdojogador;
+let porcentagemDeAcerto = " ";
+let porcentagemTexto =" ";
+let imagemFinalização =" ";
+let tituloFinalização=" ";
+let quizzQuestions;
 
 let quizzCriado = {};
 
@@ -117,10 +124,10 @@ function playQuizzId(response){
                               <img src="${response.data.image}" alt="imagem do quizz clicado">
                               <h2>${response.data.title}</h2>`
 
-    let idQuizz = response.data;
+    idQuizz = response.data;
     console.log(idQuizz);
     questions = response.data.questions;
-    const quizzQuestions = document.querySelector(".levelContainer");
+    quizzQuestions = document.querySelector(".levelContainer");
     console.log(questions);
 
     
@@ -148,7 +155,7 @@ function playQuizzId(response){
   
         }
         // colocar quantidade de questoes//
-        quizzQuestions.innerHTML += `<div class="questionBox2 content">
+        quizzQuestions.innerHTML += `<div class="questionBox2 content" style="color: #FFFFFF">
         <div class="question content" style="background-color:${questions[i].color}">${questions[i].title}</div>
         <div class="answersContainer">${answersBox}</div>`
         
@@ -162,7 +169,6 @@ function random() {
 
   // função selecionar as respostas  //
   function guardarRespostas(clicou,x){
-
     console.log(clicou);
     let option = clicou.parentNode;
     console.log(option);
@@ -175,7 +181,7 @@ function random() {
         alternative[i].classList.remove("none");
         clicou.classList.add("overNone");
     }
-   //colocanod cor da letra//
+   //colocando cor da letra//
    for(let i =0 ; alternativeColor.length > i; i++){
     alternativeColor[i].classList.add("selecionado");
    }
@@ -187,9 +193,16 @@ function random() {
 
    console.log(respostasArray);
 
-
-  setTimeout(scroll(x), 2000);
+   console.log(respostasArray.length);
+   console.log(questions.length)
+  // verifica se clicou em todas as respostas//
+  if(questions.length === respostasArray.length){
+    alert("selecionou!")
+    calcularNivel();
 }
+   setTimeout(scroll(x), 2000);
+
+  }
 function scroll(x){
     let rolar = document.querySelector(`.scroll${x+1}`);
     rolar.scrollIntoView({
@@ -199,6 +212,67 @@ function scroll(x){
     });
 }
 
+function calcularNivel(){
+    let count = 0;
+    for(let i=0 ; respostasArray.length > i ; i++){
+        if(respostasArray[i] === "green"){
+            count ++
+        }
+    } 
+    porcentdojogador = Math.round((count/ respostasArray.length)*100);
+    console.log(respostasArray.length);
+    finalizaçãoDeQuizz();
+}
+
+function finalizaçãoDeQuizz(){
+console.log(idQuizz);
+let arrayLevels = idQuizz.levels;
+console.log(arrayLevels);
+let minValueArray =[];
+for (let i = 0 ; arrayLevels.length > i ; i++){
+    let transform = Number(arrayLevels[i].minValue);
+    minValueArray.push(transform);
+}
+
+minValueArray= minValueArray.sort();
+console.log(minValueArray);
+
+console.log(porcentdojogador);
+for (let i=0 ; minValueArray.length > i; i++){
+    if(porcentdojogador >= minValueArray[i]){
+        porcentagemDeAcerto = minValueArray[i];
+        console.log(porcentagemDeAcerto);
+    }
+}
+for( let i= 0; arrayLevels.length > i ; i++ ){
+    if (porcentagemDeAcerto == arrayLevels[i].minValue){
+        console.log(porcentagemDeAcerto);
+        porcentagemTexto = arrayLevels[i].text;
+        imagemFinalização = arrayLevels[i].image;
+        tituloFinalização = arrayLevels[i].title;
+        console.log(porcentagemTexto);
+        console.log(tituloFinalização);
+        console.log(imagemFinalização);
+    }
+}
+exibiçãoDoNivel();
+}
+
+function exibiçãoDoNivel(){
+    let exibição = document.querySelector(".levelContainer");
+    exibição.innerHTML += `<div class= exibição>
+                            <div class=tituloExibição>${porcentdojogador}% de acerto : 
+                            ${tituloFinalização} </div>
+                            <div class = textoFinalização>
+                            <img src= "${imagemFinalização}">
+                            <div class = "porcentagemTxt"><h4>${porcentagemTexto}<h4></div>
+                            </div>
+                            <div class = "reiniciarQuizz">
+                            <button>Reiniciar Quizz</button>
+                            <h5 onclick="renderizarPagina1()"> Voltar para Home</h5>
+                            <div/>
+                        </div>`
+}
 
 function createQuizz(){
     RenderizarPagina3a();
@@ -533,66 +607,16 @@ function validarníveis(){
             quizzCriado.levels.push({title: títulosnível[j].value , image: URLsnível[j].value , text: descsnível[j].value, minValue: porcentagens[j].value})
         }
         console.log(quizzCriado)
-        RenderizarPagina3d()
+        postQuizz() 
     }
 }
 
-function renderizarTela2QuizzCriado(objeto){
-    screen.innerHTML = "";
-
-    screen.innerHTML = `<div class="tela tela-2">
-    <div class="banner"> </div>
- <div class="levelContainer content"> </div>          
-</div>`;
-    playQuizzCriado(objeto)
+function postQuizz(){
+    let promise = axios.post(urlAPI, quizzCriado);
+    promise.then(RenderizarPagina3d);
+    promise.catch(tratarErrorPost);
 }
 
-
-function playQuizzCriado(response){
-
-    const bannerQuizz = document.querySelector(".banner");
-    bannerQuizz.innerHTML += `<div class="black-gradient"></div> 
-                              <img src="${response.image}" alt="imagem do quizz clicado">
-                              <h2>${response.title}</h2>`
-
-    let idQuizz = response;
-    console.log(idQuizz);
-    questions = response.questions;
-    const quizzQuestions = document.querySelector(".levelContainer");
-    console.log(questions);
-
-    
-    for(let i=0; i<questions.length; i++ ){
-        //embaralhar respostas //
-        answerArray = questions[i].answers;
-        console.log(answerArray);
-        let answerArrayEmbaralhado = answerArray.sort(random);
-        // colocar respostas ja embaralhadas//
-        for(let j=0 ;j <questions[i].answers.length; j++ ){
-            if(questions[i].answers[j].isCorrectAnswer === true){
-                answersBox +=`<div class="answerBox green scroll${i}" onclick = "guardarRespostas(this, ${i})"}>
-                <div class="overlay none"></div>                            
-                <img src=${questions[i].answers[j].image}" alt="imagem da pergunta">
-                <div class="answer">${questions[i].answers[j].text}</div>
-            </div>`
-
-            } else {
-                answersBox +=`<div class="answerBox red scroll${i}" onclick = "guardarRespostas(this, ${i})"}>
-                <div class="overlay none"></div>                            
-                <img src=${questions[i].answers[j].image}" alt="imagem da pergunta">
-                <div class="answer">${questions[i].answers[j].text}</div>
-            </div>`
-            }
-  
-        }
-        // colocar quantidade de questoes//
-        quizzQuestions.innerHTML += `<div class="questionBox2 content">
-        <div class="question content" style="background-color:${questions[i].color}">${questions[i].title}</div>
-        <div class="answersContainer">${answersBox}</div>`
-        
-        answersBox="";
-    }
+function tratarErrorPost(){
+    alert("Quizz não enviado");
 }
-
-
-
