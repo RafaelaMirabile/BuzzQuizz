@@ -228,10 +228,10 @@ color: #FFFFFF;
     min-width: 200px;
     position: absolute
 }
-.green > .answer{
+.selecionado.green > .answer{
     color: green;
 }
-.red > .answer{
+.selecionado.red > .answer{
     color: red;
 }
 .overNone > .overlay{
@@ -322,4 +322,7 @@ ion-icon{
 
 .none{
     display: none;
+}
+.selecionado{
+    pointer-events: none;
 }
