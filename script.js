@@ -10,6 +10,12 @@ let escolhida;
 let answerArray=[];
 let answersBox="";
 let idQuizz;
+let porcentdojogador;
+let porcentagemDeAcerto = " ";
+let porcentagemTexto =" ";
+let imagemFinalização =" ";
+let tituloFinalização=" ";
+let quizzQuestions;
 
 
 let tituloQuizz = "";
@@ -122,7 +128,7 @@ function playQuizzId(response){
     idQuizz = response.data;
     console.log(idQuizz);
     questions = response.data.questions;
-    const quizzQuestions = document.querySelector(".levelContainer");
+    quizzQuestions = document.querySelector(".levelContainer");
     console.log(questions);
 
     
@@ -191,7 +197,7 @@ function random() {
    console.log(questions.length)
   // verifica se clicou em todas as respostas//
   if(questions.length === respostasArray.length){
-    alert("selecionou todos")
+    alert("selecionou!")
     calcularNivel();
 }
    setTimeout(scroll(x), 2000);
@@ -206,8 +212,6 @@ function scroll(x){
     });
 }
 
-
-
 function calcularNivel(){
     let count = 0;
     for(let i=0 ; respostasArray.length > i ; i++){
@@ -215,21 +219,60 @@ function calcularNivel(){
             count ++
         }
     } 
-    let porcentdojogador = Math.round((count/ respostasArray.length)*100);
+    porcentdojogador = Math.round((count/ respostasArray.length)*100);
     console.log(respostasArray.length);
-    console.log(porcentdojogador);
+    finalizaçãoDeQuizz();
+}
 
+function finalizaçãoDeQuizz(){
 console.log(idQuizz);
 let arrayLevels = idQuizz.levels;
 console.log(arrayLevels);
 let minValueArray =[];
 for (let i = 0 ; arrayLevels.length > i ; i++){
-minValueArray.push(arrayLevels[i].minValue);
-}
-console.log(minValueArray);
-console.log(minValueArray.sort())
+    let transform = Number(arrayLevels[i].minValue);
+    minValueArray.push(transform);
 }
 
+minValueArray= minValueArray.sort();
+console.log(minValueArray);
+
+console.log(porcentdojogador);
+for (let i=0 ; minValueArray.length > i; i++){
+    if(porcentdojogador >= minValueArray[i]){
+        porcentagemDeAcerto = minValueArray[i];
+        console.log(porcentagemDeAcerto);
+    }
+}
+for( let i= 0; arrayLevels.length > i ; i++ ){
+    if (porcentagemDeAcerto == arrayLevels[i].minValue){
+        console.log(porcentagemDeAcerto);
+        porcentagemTexto = arrayLevels[i].text;
+        imagemFinalização = arrayLevels[i].image;
+        tituloFinalização = arrayLevels[i].title;
+        console.log(porcentagemTexto);
+        console.log(tituloFinalização);
+        console.log(imagemFinalização);
+    }
+}
+exibiçãoDoNivel();
+}
+
+function exibiçãoDoNivel(){
+    let exibição = document.querySelector(".levelContainer");
+    exibição.innerHTML += `<div class= exibição>
+                            <div class=tituloExibição>${porcentdojogador}% de acerto : 
+                            ${tituloFinalização} </div>
+                            <div class = textoFinalização>
+                            <img src= "${imagemFinalização}">
+                            <div class = "porcentagemTxt"><h4>${porcentagemTexto}<h4></div>
+                            </div>
+                            <div class = "reiniciarQuizz">
+                            <button>Reiniciar Quizz</button>
+                            <h5> Voltar para Home</h5>
+                            <div/>
+                        </div>`
+}
 
 function createQuizz(){
     RenderizarPagina3a();
