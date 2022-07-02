@@ -9,6 +9,7 @@ let questions;
 let escolhida;
 let answerArray=[];
 let answersBox="";
+let idQuizz;
 
 
 let tituloQuizz = "";
@@ -108,8 +109,7 @@ function playQuizz(id){
     const promise = axios.get(`${urlAPI}/${id}`);
     promise.then(playQuizzId);
 
-    const tela1 = document.querySelector(".tela-1");
-    const tela3 = document.querySelector(".tela-3");
+
 }
 
 //Função renderizar QuizzClicado//
@@ -120,7 +120,7 @@ function playQuizzId(response){
                               <img src="${response.data.image}" alt="imagem do quizz clicado">
                               <h2>${response.data.title}</h2>`
 
-    let idQuizz = response.data;
+    idQuizz = response.data;
     console.log(idQuizz);
     questions = response.data.questions;
     const quizzQuestions = document.querySelector(".levelContainer");
@@ -165,7 +165,6 @@ function random() {
 
   // função selecionar as respostas  //
   function guardarRespostas(clicou,x){
-
     console.log(clicou);
     let option = clicou.parentNode;
     console.log(option);
@@ -178,7 +177,7 @@ function random() {
         alternative[i].classList.remove("none");
         clicou.classList.add("overNone");
     }
-   //colocanod cor da letra//
+   //colocando cor da letra//
    for(let i =0 ; alternativeColor.length > i; i++){
     alternativeColor[i].classList.add("selecionado");
    }
@@ -190,9 +189,16 @@ function random() {
 
    console.log(respostasArray);
 
-
-  setTimeout(scroll(x), 2000);
+   console.log(respostasArray.length);
+   console.log(questions.length)
+  // verifica se clicou em todas as respostas//
+  if(questions.length === respostasArray.length){
+    alert("selecionou todos")
+    calcularNivel();
 }
+   setTimeout(scroll(x), 2000);
+
+  }
 function scroll(x){
     let rolar = document.querySelector(`.scroll${x+1}`);
     rolar.scrollIntoView({
@@ -200,6 +206,27 @@ function scroll(x){
         block: 'center',
         inline: 'center'
     });
+}
+
+
+
+function calcularNivel(){
+    let count = 0;
+    for(let i=0 ; respostasArray.length > i ; i++){
+        if(respostasArray[i] === "green"){
+            count ++
+        }
+        console.log(count);
+    } 
+
+console.log(idQuizz);
+let arrayLevels = idQuizz.levels;
+console.log(arrayLevels);
+let minValueArray =[];
+for (let i = 0 ; arrayLevels.length > i ; i++){
+minValueArray.push(arrayLevels[i].minValue);
+}
+console.log(minValueArray);
 }
 
 
