@@ -360,7 +360,6 @@ function validarníveis(){
         const descnível = descsnível[i].value
         if (títulonível.length >= 10){
             if (porcentagem !== NaN && porcentagem >= 0 && porcentagem <= 100 && porcentagem !== ""){
-                console.log(porcentagem)
                 if (isValidHttpUrl(URLnível)){
                     if (descnível.length >= 30){
                         count++
@@ -381,7 +380,7 @@ function validarníveis(){
         }
     }
     console.log(achei0)
-    if (count !== 3 || !achei0){
+    if (count !== qtdNiveis || !achei0){
         if (!achei0){
             errosníveis += `Pelo menos uma porcentagem deve ser 0`
         }
