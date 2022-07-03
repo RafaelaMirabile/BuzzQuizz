@@ -333,6 +333,7 @@ ion-icon{
     justify-content: center;
     align-items: center;
     margin-bottom: 50px;
+    margin-top: 150px;
     width: 764px;
 }
 .tituloExibição{
@@ -383,4 +384,8 @@ h5{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.levelContainer{
+    padding-bottom: 150px;
 }

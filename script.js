@@ -197,19 +197,32 @@ function random() {
    console.log(questions.length)
   // verifica se clicou em todas as respostas//
   if(questions.length === respostasArray.length){
-    alert("selecionou!")
     calcularNivel();
 }
-   setTimeout(scroll(x), 2000);
+   setTimeout(scroll, 2000,x);
 
-  }
+}
 function scroll(x){
-    let rolar = document.querySelector(`.scroll${x+1}`);
-    rolar.scrollIntoView({
-        behavior: 'auto',
-        block: 'center',
-        inline: 'center'
-    });
+    if(questions.length === respostasArray.length){
+        setTimeout(scrollFinal, 2000);
+    }else{
+        let rolar = document.querySelector(`.scroll${x+1}`);
+        rolar.scrollIntoView({
+            behavior: 'auto',
+            block: 'center',
+            inline: 'center'
+        });
+    }
+}
+
+function scrollFinal(){
+    let scrollFinal = document.querySelector(".porcentagemTxt")
+        scrollFinal.scrollIntoView({
+            behavior: 'auto',
+            block: 'center',
+            inline: 'center'
+        });;
+    respostasArray =[];   
 }
 
 function calcularNivel(){
@@ -268,11 +281,10 @@ function exibiçãoDoNivel(){
                             <div class = "porcentagemTxt"><h4>${porcentagemTexto}<h4></div>
                             </div>
                             <div class = "reiniciarQuizz">
-                            <button>Reiniciar Quizz</button>
+                            <button onclick="renderizarTela2(idQuizz.id)">Reiniciar Quizz</button>
                             <h5 onclick="renderizarPagina1()"> Voltar para Home</h5>
                             <div/>
-                        </div>`
-    respostasArray =[];                    
+                        </div>`                 
 }
 
 function createQuizz(){
