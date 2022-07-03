@@ -47,6 +47,16 @@
         width: 100%;
         object-fit: cover;
     }
+    .listTitle{
+        padding-left: 20px;
+    }
+    .user-empty {
+        margin: 20px;
+    }
+ 
+    .user-full{
+        margin: 20px;
+    }
 }
 
 
