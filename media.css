@@ -57,6 +57,90 @@
     .user-full{
         margin: 20px;
     }
+    .levelContainer{
+        width: 100%
+    }
+    .tela-2{
+        width: 100%;
+    }
+    .question{
+        width: 100%;
+    }
+    .questionBox2{
+        width: 100%;
+    }
+    .answersContainer{
+        width: 100%;
+        justify-content: space-between;
+    }
+    .answerBox{
+        width: 48%;
+        margin-right: 0;
+    }
+    .answerBox img{
+        width: 100%;
+        height: 113px;
+        object-fit: cover;
+        margin-left: 0;
+        margin-top: 0;
+    }
+    .exibição{
+        width: 100%;
+    }
+    .textoFinalização{
+        display: block;
+        margin-right: 0;
+
+    }
+    .tituloExibição{
+        padding: 0 10px;
+    }
+    .exibição img {
+        width: 100%;
+        height: 273px;
+        object-fit: cover;
+    }
+    .banner h2{
+        word-break: break-word;
+        margin: 10px
+    }
+    .questions{
+        width: 100%
+    }
+    .tela button {
+        width: 70%;
+        word-break: break-word;
+    }
+    input {
+        width: 90%;
+    }
+    .level-box{
+        width: 100%;
+    }
+    .quest{
+        width: 100%;
+        margin: 0;
+        padding: 10px
+    }
+    .otherQuestions{
+        width: 100%;
+    }
+    .inserir{
+        width: 100%;
+    }
+    .pai{
+        width: 80%;
+        height: 185px;
+    }
+    .tela-3-4 img{
+        width: 100%;
+        height: 185px;
+    }
+    .reiniciarQuizz {
+        height: 30px;
+    }
+
+    
 }
 
 

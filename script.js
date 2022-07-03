@@ -216,7 +216,7 @@ function scroll(x){
 }
 
 function scrollFinal(){
-    let scrollFinal = document.querySelector(".porcentagemTxt")
+    let scrollFinal = document.querySelector(".scrollFinal")
         scrollFinal.scrollIntoView({
             behavior: 'auto',
             block: 'center',
@@ -277,7 +277,7 @@ function exibiçãoDoNivel(){
                             <div class=tituloExibição>${porcentdojogador}% de acerto : 
                             ${tituloFinalização} </div>
                             <div class = textoFinalização>
-                            <img src= "${imagemFinalização}">
+                            <img class="scrollFinal"src= "${imagemFinalização}">
                             <div class = "porcentagemTxt"><h4>${porcentagemTexto}<h4></div>
                             </div>
                             <div class = "reiniciarQuizz">

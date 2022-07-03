@@ -47,6 +47,7 @@
 }
 .quizz{
     background-color: #EC362D;
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
     justify-content: center;
