@@ -141,14 +141,14 @@ function playQuizzId(response){
             if(questions[i].answers[j].isCorrectAnswer === true){
                 answersBox +=`<div class="answerBox green scroll${i}" onclick = "guardarRespostas(this, ${i})"}>
                 <div class="overlay none"></div>                            
-                <img src=${questions[i].answers[j].image}" alt="imagem da pergunta">
+                <img src=${questions[i].answers[j].image} alt="imagem da pergunta">
                 <div class="answer">${questions[i].answers[j].text}</div>
             </div>`
 
             } else {
                 answersBox +=`<div class="answerBox red scroll${i}" onclick = "guardarRespostas(this, ${i})"}>
                 <div class="overlay none"></div>                            
-                <img src=${questions[i].answers[j].image}" alt="imagem da pergunta">
+                <img src=${questions[i].answers[j].image} alt="imagem da pergunta">
                 <div class="answer">${questions[i].answers[j].text}</div>
             </div>`
             }
@@ -221,7 +221,7 @@ function scrollFinal(){
             behavior: 'auto',
             block: 'center',
             inline: 'center'
-        });;
+        });
     respostasArray =[];   
 }
 
@@ -567,11 +567,19 @@ function renderizarCriaçãoDeNivel(x){
 
 function RenderizarPagina3d(){
     screen.innerHTML = `<div class="tela tela-3-4"> 
-            <h2>Seu quizz está pronto!</h2>
-            
-            
-            <button onclick="renderizarTela2QuizzCriado(quizzCriado)()">Acessar Quizz</button>
-            <button onclick="renderizarPagina1()" class="voltar">voltar para home</button>
+            <div class="pai">
+                    <div>
+                        <img src="${URLimgQuizz}" alt="">
+                        <div class="black-gradient ZZZ"> 
+                            <p class="tituloQuizCriado"> ${tituloQuizz}</p> 
+                        </div>
+                    </div> 
+            <div>
+            <div class="botoesQuizz">
+                <h2>Seu quizz está pronto!</h2>
+                <button ()">Acessar Quizz</button>
+                <button onclick="renderizarPagina1()" class="voltar">voltar para home</button>
+            <div>
         </div>` 
 }
 
@@ -631,5 +639,6 @@ function postQuizz(){
 }
 
 function tratarErrorPost(){
-    alert("Quizz não enviado");
+    alert("Quizz não enviado")
+    renderizarPagina1();
 }
