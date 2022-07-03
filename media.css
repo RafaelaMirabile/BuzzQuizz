@@ -1,0 +1,45 @@
+@media screen and (max-width: 1100px){
+    .topo{
+        width: 100%;
+        text-align: center;
+    }
+    .user-empty{
+        width: 100%;
+    } 
+    .advise{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .listTitle{
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+    }
+    .quizzes{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    .listquizzes{
+        width: 100%;
+    }
+    .h1{
+        width: 100%;
+    }
+    .screen{
+        width: 100%;
+    }
+    .tela{
+        width: 100%;
+    }
+    .quizz{
+        width: 100%;
+    }
+    .quizz img{
+        object-fit: cover;
+    }
+}
