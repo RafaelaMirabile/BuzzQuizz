@@ -137,10 +137,14 @@
         height: 185px;
     }
     .reiniciarQuizz {
-        height: 30px;
+        height: 150px;
     }
-
-    
+    .user-full{
+        width: 100%;
+    }
+    .userTitle h3 {
+        margin-left: 20px;
+    }
 }
 
 

@@ -1,6 +1,6 @@
 //tela:
 let screen = document.querySelector(".screen");
-let userHaveQuizz = false;
+let userHaveQuizz = true;
 
 const urlAPI =("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes");
 let respostasEmbaralhadas;
@@ -29,6 +29,7 @@ let porcentagens = [];
 let URLsnível = [];
 let descsnível = [];
 
+let arrayIDs = [];
 
 renderizarPagina1();
 
@@ -48,6 +49,7 @@ function renderizarUserSpace(){
                     <div class="userTitle">
                         <h3>Seus Quizzes</h3>
                         <h3 class="plus" onclick="RenderizarPagina3a()">+</h3>
+
                     </div>
                 </div>
             </div>`
@@ -99,6 +101,7 @@ function renderizarTodosOsQuizzes(response){
 }
 
 function renderizarTela2(quizzClicado){
+    console.log(quizzClicado) //numero
     screen.innerHTML = "";
 
     screen.innerHTML = `<div class="tela tela-2">
@@ -112,13 +115,14 @@ pegarQuizzesAxios();
 
 // função get API QUIZZ ID e muda da tela 1 para 2 // 
 function playQuizz(id){
+    console.log(id) //numero
     const promise = axios.get(`${urlAPI}/${id}`);
     promise.then(playQuizzId);
 }
 
 //Função renderizar QuizzClicado//
 function playQuizzId(response){
-
+    console.log(response) //objeto
     const bannerQuizz = document.querySelector(".banner");
     bannerQuizz.innerHTML += `<div class="black-gradient"></div> 
                               <img src="${response.data.image}" alt="imagem do quizz clicado">
@@ -565,7 +569,8 @@ function renderizarCriaçãoDeNivel(x){
         </div>`
 }   
 
-function RenderizarPagina3d(){
+function RenderizarPagina3d(id){
+    console.log(id) 
     screen.innerHTML = `<div class="tela tela-3-4"> 
             <div class="pai">
                     <div>
@@ -577,7 +582,7 @@ function RenderizarPagina3d(){
             <div>
             <div class="botoesQuizz">
                 <h2>Seu quizz está pronto!</h2>
-                <button ()">Acessar Quizz</button>
+                <button onclick="renderizarTela2(${id})">Acessar Quizz</button>
                 <button onclick="renderizarPagina1()" class="voltar">voltar para home</button>
             <div>
         </div>` 
@@ -627,18 +632,41 @@ function validarníveis(){
         for(let j = 0; j <= qtdNiveis - 1; j++){
             quizzCriado.levels.push({title: títulosnível[j].value , image: URLsnível[j].value , text: descsnível[j].value, minValue: porcentagens[j].value})
         }
-        console.log(quizzCriado)
         postQuizz() 
     }
 }
 
 function postQuizz(){
     let promise = axios.post(urlAPI, quizzCriado);
-    promise.then(RenderizarPagina3d);
+    promise.then(pegarIdQuizzCriado);
+    console.log(promise);
     promise.catch(tratarErrorPost);
+}
+function pegarIdQuizzCriado(resposta){
+    console.log(resposta);
+    id = resposta.data.id;
+    console.log(id); 
+    RenderizarPagina3d(id);
+    
+    localStorage(id)
 }
 
 function tratarErrorPost(){
     alert("Quizz não enviado")
     renderizarPagina1();
+}
+
+function localStorage(id){
+    if(window.localStorage.array){
+        const meusIDsSerializados = window.localStorage.getItem("array");
+        const meusIDsDeserializados = JSON.parse(meusIDsSerializados);
+        meusIDsDeserializados.push(id);
+        let arraySerializada = JSON.stringify(meusIDsDeserializados);
+        window.localStorage.setItem("array", arraySerializada);
+
+    }else{
+        arrayIDs.push(id);
+        let arraySerializada = JSON.stringify(arrayIDs);
+        window.localStorage.setItem("array", `${arraySerializada}`);
+    };
 }
