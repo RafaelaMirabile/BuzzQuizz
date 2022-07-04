@@ -92,9 +92,6 @@
         margin-right: 0;
 
     }
-    .tituloExibição{
-        padding: 0 10px;
-    }
     .exibição img {
         width: 100%;
         height: 273px;
@@ -145,16 +142,14 @@
     .userTitle h3 {
         margin-left: 20px;
     }
+    .inserirusuario .quizz img{
+    width: 100%;
+    }
+    .inserirusuario{
+        padding: 20px;
+    }
+
 }
-
-
-
-
-
-
-
-
-
 
 @media screen and (max-width: 614px){
     .topo{

@@ -51,17 +51,17 @@ function renderizarUserSpace(){
     if (meusIDsDeserializados !== null){
         userHaveQuizz = true;
     }
-    
+
     if(userHaveQuizz){
         tela1.innerHTML = `<div class="user-full">
-                <div class="full">
-                    <div class="userTitle">
-                        <h3>Seus Quizzes</h3>
-                        <h3 class="plus" onclick="RenderizarPagina3a()">+</h3>
-                        <div class="inserirusuario"> </div>
-                    </div>
-                </div>
-            </div>`
+                                <div class="full">
+                                    <div class="userTitle">
+                                        <h3>Seus Quizzes</h3>
+                                        <h3 class="plus" onclick="RenderizarPagina3a()">+</h3>
+                                    </div>
+                                    <div class="inserirusuario">    </div>
+                                </div>
+                            </div>`
         pegarquizzesusuario();
     } else {tela1.innerHTML = `<div class="user-empty">
              <div>
@@ -170,7 +170,7 @@ function playQuizzId(response){
         }
         // colocar quantidade de questoes//
         quizzQuestions.innerHTML += `<div class="questionBox2 content" style="color: #FFFFFF">
-        <div class="question content" style="background-color:${questions[i].color}">${questions[i].title}</div>
+        <div class="question content" style="background-color:${questions[i].color}"><p>${questions[i].title}</p></div>
         <div class="answersContainer">${answersBox}</div>`
         
         answersBox="";
@@ -288,8 +288,8 @@ exibiçãoDoNivel();
 function exibiçãoDoNivel(){
     let exibição = document.querySelector(".levelContainer");
     exibição.innerHTML += `<div class= exibição>
-                            <div class=tituloExibição>${porcentdojogador}% de acerto : 
-                            ${tituloFinalização} </div>
+                            <div class=tituloExibição><p>${porcentdojogador}% de acerto : 
+                            ${tituloFinalização} </p></div>
                             <div class = textoFinalização>
                             <img class="scrollFinal"src= "${imagemFinalização}">
                             <div class = "porcentagemTxt"><h4>${porcentagemTexto}<h4></div>
@@ -416,7 +416,7 @@ function pergunta(x){
 
 function verificaValoresPagina3b(){
     quizzCriado = {title: tituloQuizz, image: URLimgQuizz, questions:[], levels:[]};  
-    
+    let chave = 0
     for(let i = 1; i <= qtdPerguntas; i++){
         let textPergunta =document.querySelector(`.textPergunta${i}`);
         textPergunta  = textPergunta.value;
@@ -481,13 +481,12 @@ function verificaValoresPagina3b(){
                             if(urlImgIncorretaAOK){
                                 if(urlImgIncorretaBOK){
                                     if(urlImgIncorretaCOK){
-                                        if(verificadorDePerguntas === 0 && i === qtdPerguntas){
+                                        chave++
+                                        if(verificadorDePerguntas === 0 && i === qtdPerguntas && chave === qtdPerguntas){
 
                                             RenderizarPagina3c();                           
                                             
                                         }else{
-                                            if(verificadorDePerguntas+i === qtdPerguntas)
-                                            alert(`preencha a pergunta ${qtdPerguntas + 1 - verificadorDePerguntas}`)
                                         }
                                     }else{
                                         alert(`insira uma url valida para a imagem da resposta incorreta 3  da pergunta ${i}`)
@@ -707,10 +706,10 @@ function axiosusuario(id){
 function renderizarquizzusuaario(response){
     response = response.data;
    let quizzUsuario = `<div class="quizz" onclick="renderizarTela2(${response.id})">
-    <div class="black-gradient"></div> 
-    <img src="${response.image}">
-    <h1>${response.title}</h1>
-</div>`
+                            <div class="black-gradient">   </div> 
+                            <img src="${response.image}">
+                            <h1>${response.title}</h1>
+                        </div>`
 
 let inserir = document.querySelector(".inserirusuario");
 console.log(inserir);
