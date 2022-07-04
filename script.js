@@ -93,7 +93,6 @@ function renderizarListQuizzes(){
 function pegarQuizzesAxios(){
     const promise = axios.get(urlAPI);
     promise.then(renderizarTodosOsQuizzes);
-    promise.catch(() => console.log("deu ruim"));
 }
 
 function renderizarTodosOsQuizzes(response){
@@ -111,7 +110,6 @@ function renderizarTodosOsQuizzes(response){
 }
 
 function renderizarTela2(quizzClicado){
-    console.log(quizzClicado) //numero
     screen.innerHTML = "";
 
     screen.innerHTML = `<div class="tela tela-2">
@@ -125,30 +123,25 @@ pegarQuizzesAxios();
 
 // função get API QUIZZ ID e muda da tela 1 para 2 // 
 function playQuizz(id){
-    console.log(id) //numero
     const promise = axios.get(`${urlAPI}/${id}`);
     promise.then(playQuizzId);
 }
 
 //Função renderizar QuizzClicado//
 function playQuizzId(response){
-    console.log(response) //objeto
     const bannerQuizz = document.querySelector(".banner");
     bannerQuizz.innerHTML += `<div class="black-gradient"></div> 
                               <img src="${response.data.image}" alt="imagem do quizz clicado">
                               <h2>${response.data.title}</h2>`
 
     idQuizz = response.data;
-    console.log(idQuizz);
     questions = response.data.questions;
     quizzQuestions = document.querySelector(".levelContainer");
-    console.log(questions);
 
     
     for(let i=0; i<questions.length; i++ ){
         //embaralhar respostas //
         answerArray = questions[i].answers;
-        console.log(answerArray);
         let answerArrayEmbaralhado = answerArray.sort(random);
         // colocar respostas ja embaralhadas//
         for(let j=0 ;j <questions[i].answers.length; j++ ){
@@ -183,12 +176,9 @@ function random() {
 
   // função selecionar as respostas  //
   function guardarRespostas(clicou,x){
-    console.log(clicou);
     let option = clicou.parentNode;
-    console.log(option);
     let alternative = option.querySelectorAll(".answerBox .overlay");
     let alternativeColor = option.querySelectorAll(".answerBox");
-    console.log(alternativeColor);
 
    // colocando overlay//
     for( let i=0 ; alternative.length > i ; i++){
@@ -205,11 +195,7 @@ function random() {
     respostasArray.push("green");
    }
 
-   console.log(respostasArray);
 
-   console.log(respostasArray.length);
-   console.log(questions.length)
-  // verifica se clicou em todas as respostas//
   if(questions.length === respostasArray.length){
     calcularNivel();
 }
@@ -247,39 +233,34 @@ function calcularNivel(){
         }
     } 
     porcentdojogador = Math.round((count/ respostasArray.length)*100);
-    console.log(respostasArray.length);
     finalizaçãoDeQuizz();
 }
 
 function finalizaçãoDeQuizz(){
-console.log(idQuizz);
 let arrayLevels = idQuizz.levels;
-console.log(arrayLevels);
 let minValueArray =[];
 for (let i = 0 ; arrayLevels.length > i ; i++){
     let transform = Number(arrayLevels[i].minValue);
     minValueArray.push(transform);
 }
 
-minValueArray= minValueArray.sort();
-console.log(minValueArray);
+minValueArray= minValueArray.sort(function(a,b){
+    if (a>b) return 1;
+    if (a<b) return -1;
+    return 0
+});
 
-console.log(porcentdojogador);
+
 for (let i=0 ; minValueArray.length > i; i++){
     if(porcentdojogador >= minValueArray[i]){
         porcentagemDeAcerto = minValueArray[i];
-        console.log(porcentagemDeAcerto);
     }
 }
 for( let i= 0; arrayLevels.length > i ; i++ ){
     if (porcentagemDeAcerto == arrayLevels[i].minValue){
-        console.log(porcentagemDeAcerto);
         porcentagemTexto = arrayLevels[i].text;
         imagemFinalização = arrayLevels[i].image;
         tituloFinalização = arrayLevels[i].title;
-        console.log(porcentagemTexto);
-        console.log(tituloFinalização);
-        console.log(imagemFinalização);
     }
 }
 exibiçãoDoNivel();
@@ -579,7 +560,6 @@ function renderizarCriaçãoDeNivel(x){
 }   
 
 function RenderizarPagina3d(id){
-    console.log(id) 
     screen.innerHTML = `<div class="tela tela-3-4"> 
             <div class="pai">
                     <div>
@@ -648,13 +628,10 @@ function validarníveis(){
 function postQuizz(){
     let promise = axios.post(urlAPI, quizzCriado);
     promise.then(pegarIdQuizzCriado);
-    console.log(promise);
     promise.catch(tratarErrorPost);
 }
 function pegarIdQuizzCriado(resposta){
-    console.log(resposta);
     id = resposta.data.id;
-    console.log(id); 
     RenderizarPagina3d(id);
     local(id)
 }
@@ -687,11 +664,9 @@ function pegarquizzesusuario(){
         userHaveQuizz = true;
         percorrerarray(meusIDsDeserializados);
     }
-
 }
 
 function percorrerarray(array){
-    console.log(array);
     for (let i = 0; i < array.length; i++){
         const id = array[i];
         axiosusuario(id);
@@ -712,7 +687,6 @@ function renderizarquizzusuaario(response){
                         </div>`
 
 let inserir = document.querySelector(".inserirusuario");
-console.log(inserir);
 inserir.innerHTML += quizzUsuario;
 
 }
