@@ -34,6 +34,7 @@ let arrayIDs = [];
 renderizarPagina1();
 
 function renderizarPagina1(){
+    
     screen.innerHTML = "";
     screen.innerHTML = `<div class="tela tela-1"> </div>`;
     
@@ -43,6 +44,14 @@ function renderizarPagina1(){
 
 function renderizarUserSpace(){
     let tela1 = document.querySelector(".tela-1");
+
+    let meusIDsSerializados= "";
+    meusIDsSerializados = window.localStorage.getItem("array");
+    const meusIDsDeserializados = JSON.parse(meusIDsSerializados);
+    if (meusIDsDeserializados !== null){
+        userHaveQuizz = true;
+    }
+    
     if(userHaveQuizz){
         tela1.innerHTML = `<div class="user-full">
                 <div class="full">
@@ -53,6 +62,7 @@ function renderizarUserSpace(){
                     </div>
                 </div>
             </div>`
+        pegarquizzesusuario();
     } else {tela1.innerHTML = `<div class="user-empty">
              <div>
                  <div class="content">
@@ -66,7 +76,6 @@ function renderizarUserSpace(){
              </div>
          </div >`
     }
-    pegarquizzesusuario();
 }
 
 function renderizarListQuizzes(){
