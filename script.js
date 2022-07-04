@@ -66,6 +66,7 @@ function renderizarUserSpace(){
              </div>
          </div >`
     }
+    pegarquizzesusuario();
 }
 
 function renderizarListQuizzes(){
@@ -671,15 +672,18 @@ function local(id){
 }
 
 function pegarquizzesusuario(){
-    const meusIDsSerializados = window.localStorage.getItem("array");
+    let meusIDsSerializados= "";
+    meusIDsSerializados = window.localStorage.getItem("array");
     const meusIDsDeserializados = JSON.parse(meusIDsSerializados);
-    percorrerarray(meusIDsDeserializados);
+    if (meusIDsDeserializados !== null){
+        userHaveQuizz = true;
+        percorrerarray(meusIDsDeserializados);
+    }
+
 }
 
 function percorrerarray(array){
-    if (array.length !== 0){
-        userHaveQuizz = true;
-    }
+    console.log(array);
     for (let i = 0; i < array.length; i++){
         const id = array[i];
         axiosusuario(id);
@@ -693,4 +697,14 @@ function axiosusuario(id){
 
 function renderizarquizzusuaario(response){
     response = response.data;
+   let quizzUsuario = `<div class="quizz" onclick="renderizarTela2(${response.id})">
+    <div class="black-gradient"></div> 
+    <img src="${response.image}">
+    <h1>${response.title}</h1>
+</div>`
+
+let inserir = document.querySelector(".inserirusuario");
+console.log(inserir);
+inserir.innerHTML += quizzUsuario;
+
 }
