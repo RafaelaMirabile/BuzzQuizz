@@ -1,6 +1,6 @@
 //tela:
 let screen = document.querySelector(".screen");
-let userHaveQuizz = true;
+let userHaveQuizz = false;
 
 const urlAPI =("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes");
 let respostasEmbaralhadas;
@@ -49,7 +49,7 @@ function renderizarUserSpace(){
                     <div class="userTitle">
                         <h3>Seus Quizzes</h3>
                         <h3 class="plus" onclick="RenderizarPagina3a()">+</h3>
-
+                        <div class="inserirusuario"> </div>
                     </div>
                 </div>
             </div>`
@@ -647,8 +647,7 @@ function pegarIdQuizzCriado(resposta){
     id = resposta.data.id;
     console.log(id); 
     RenderizarPagina3d(id);
-    
-    localStorage(id)
+    local(id)
 }
 
 function tratarErrorPost(){
@@ -656,17 +655,42 @@ function tratarErrorPost(){
     renderizarPagina1();
 }
 
-function localStorage(id){
+function local(id){
     if(window.localStorage.array){
         const meusIDsSerializados = window.localStorage.getItem("array");
         const meusIDsDeserializados = JSON.parse(meusIDsSerializados);
         meusIDsDeserializados.push(id);
         let arraySerializada = JSON.stringify(meusIDsDeserializados);
-        window.localStorage.setItem("array", arraySerializada);
+        localStorage.setItem("array" , arraySerializada);
 
-    }else{
+    }else {
         arrayIDs.push(id);
         let arraySerializada = JSON.stringify(arrayIDs);
-        window.localStorage.setItem("array", `${arraySerializada}`);
+        localStorage.setItem("array", arraySerializada);
     };
+}
+
+function pegarquizzesusuario(){
+    const meusIDsSerializados = window.localStorage.getItem("array");
+    const meusIDsDeserializados = JSON.parse(meusIDsSerializados);
+    percorrerarray(meusIDsDeserializados);
+}
+
+function percorrerarray(array){
+    if (array.length !== 0){
+        userHaveQuizz = true;
+    }
+    for (let i = 0; i < array.length; i++){
+        const id = array[i];
+        axiosusuario(id);
+    }
+}
+
+function axiosusuario(id){
+    const promise = axios.get(`${urlAPI}/${id}`);
+    promise.then(renderizarquizzusuaario);
+}
+
+function renderizarquizzusuaario(response){
+    response = response.data;
 }
