@@ -2,7 +2,7 @@
 let screen = document.querySelector(".screen");
 let userHaveQuizz = false;
 
-const urlAPI =("https://mock-api.driven.com.br/api/v7/buzzquizz/quizzes");
+const urlAPI =("https://mock-api.driven.com.br/api/vs/buzzquizz/quizzes");
 let respostasEmbaralhadas;
 let respostasArray = [];
 let questions;
