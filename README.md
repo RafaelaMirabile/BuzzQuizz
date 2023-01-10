@@ -1,7 +1,7 @@
 <h1>BuzzQuizz</h1>
 
 <h2>A website where you can create and play quizzes and share it with other people</h2>
-<h2>Made with only HTML, CSS and JavaScript</h2>
+<h2>Made only with HTML, CSS and JavaScript</h2>
 
 <h3>The first group project where I learned A LOT about how to deal with code conflicts and co-working</h3>
 <h3>Made with other 2 colleagues we spent at least 80 hours building this project, learning a lot of new things with each other in the proccess.</h3>
