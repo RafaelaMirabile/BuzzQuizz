@@ -84,9 +84,9 @@ The following tools were used in the construction of the project:
 
 **Frontend** 
 
--   **[HTML]**
--   **[JavaScript]**
--   **[CSS]**
+-   **HTML**
+-   **JavaScript**
+-   **CSS**
 
 ---
 
