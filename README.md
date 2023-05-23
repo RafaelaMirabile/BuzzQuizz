@@ -23,7 +23,7 @@
 
 ## About
 
-A website where you can create and play quizzes and share it with other people.
+A website where you can create,play and share quizzes with other people.
 
 ---
 
