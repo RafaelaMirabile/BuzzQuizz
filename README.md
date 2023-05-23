@@ -31,7 +31,14 @@ A website where you can create,play and share quizzes with other people.
 ## Layout
 
 <div align="center">
- <img src="./public/mywallet.gif" alt="App demonstration"/>
+ <img src="./imgBuzzQuizz/1.png" alt="App demonstration"/>
+	<img src="./imgBuzzQuizz/2.png" alt="App demonstration"/>
+	<img src="./imgBuzzQuizz/3.png" alt="App demonstration"/>
+	<img src="./imgBuzzQuizz/4.png" alt="App demonstration"/>
+	<img src="./imgBuzzQuizz/5.png" alt="App demonstration"/>
+	<img src="./imgBuzzQuizz/11.png" alt="App demonstration"/>
+	<img src="./imgBuzzQuizz/22.png" alt="App demonstration"/>
+	<img src="./imgBuzzQuizz/33.png" alt="App demonstration"/>
 </div>
 
 
