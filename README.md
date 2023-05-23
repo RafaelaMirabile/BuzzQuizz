@@ -50,7 +50,7 @@ Develop the front-end using a preexistent active API.
 ## Pre-requisites
 
 Before you begin, you will need to have the following tools installed on your machine:
-[Git](https://git-scm.com), [Node.js](https://nodejs.org/en/), [VSCode](https://code.visualstudio.com/).
+[Git](https://git-scm.com), [Node.js](https://nodejs.org/en/), [VSCode](https://code.visualstudio.com/), [VSCode Live Server](https://github.com/ritwickdey/vscode-live-server/blob/master/README.md).
 
 ### Running the Frontend
 
@@ -63,15 +63,10 @@ $ git clone ggit@github.com:RafaelaMirabile/BuzzQuizz.git
 // Access the project folder cmd/terminal
 $ cd BuzzQuizz
 
-// Install the dependencies
-$ npm install
+// Install VSCode Live Server. Check it out at [VSCode Live Server](https://github.com/ritwickdey/vscode-live-server/blob/master/README.md).
 
-// If you want to run your app on localhost, create a .env file (same as the env.example) with the environment variable pointing to your local server.
 
-// Run the application in development mode
-$ npm start
-
-// The server will start at port: 3000
+// The server will start at http://127.0.0.1:5500/
 
 ```
 
