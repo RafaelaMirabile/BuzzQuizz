@@ -1,9 +1,9 @@
 <h1 align="center">
-   💰 <a href="#"> Buzz Quizz </a>
+   :crayon: <a href="#"> Buzz Quizz </a>
 </h1>
 
 <h3 align="center">
-    Record and track your financial records simply and effectively!
+    Build and play quizzes!
 </h3>
 
 <h4 align="center"> 
@@ -23,7 +23,7 @@
 
 ## About
 
-Aimed at bringing the financial notepad into the virtual world, MyWallet is perfect for interact with your records.
+A website where you can create and play quizzes and share it with other people.
 
 ---
 
@@ -36,14 +36,14 @@ Aimed at bringing the financial notepad into the virtual world, MyWallet is perf
 
 
 
-This layout was inspired by <a href="https://www.figma.com/file/p37uJdpZWRLED7YEwDFfUd/MyWallet?node-id=0%3A1">this</a> Figma prototype.
+This layout was inspired by <a href="https://www.figma.com/file/nCuPD1re0r4EAwNl7OCNvz/BuzzQuizz-Turma-02?node-id=0%3A1">this</a> Figma prototype.
 
 
 ---
 
 ## How it works
 
-Develop the front end using an preexistent active API.
+Develop the front-end using a preexistent active API.
 
 ---
 
@@ -58,10 +58,10 @@ Before you begin, you will need to have the following tools installed on your ma
 ``` jsx
 
 // Clone this repository
-$ git clone git@github.com:RafaelaMirabile/mywallet-front.git
+$ git clone ggit@github.com:RafaelaMirabile/BuzzQuizz.git
 
 // Access the project folder cmd/terminal
-$ cd my-wallet
+$ cd BuzzQuizz
 
 // Install the dependencies
 $ npm install
@@ -82,18 +82,11 @@ $ npm start
 
 The following tools were used in the construction of the project:
 
-**Frontend**  ([React](https://reactjs.org/))
+**Frontend** 
 
--   **[Axios](https://github.com/axios/axios)**
--   **[React-loader-spinner](https://github.com/mhnpd/react-loader-spinner)**
--   **[React-router-dom](https://github.com/remix-run/react-router)**
--   **[Styled-components](https://github.com/styled-components/styled-components)**
--   **[SweetAlert2](https://github.com/sweetalert2/sweetalert2)**
--   **[Dayjs](https://github.com/dayjs)**
--   **[React-currency-input-fiel](https://github.com/cchanxzy/react-currency-input-field)**
-
-> See the file  [package.json](https://github.com/RafaelaMirabile/mywallet-front/blob/main/package.json)
-
+-   **[HTML]**
+-   **[JavaScript]**
+-   **[CSS]**
 
 ---
 
@@ -110,4 +103,3 @@ The following tools were used in the construction of the project:
 ## Author
 
 Developed by Rafaela C. Mirabile.
-
