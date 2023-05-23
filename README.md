@@ -63,7 +63,7 @@ $ git clone ggit@github.com:RafaelaMirabile/BuzzQuizz.git
 // Access the project folder cmd/terminal
 $ cd BuzzQuizz
 
-// Install VSCode Live Server. Check it out at [VSCode Live Server](https://github.com/ritwickdey/vscode-live-server/blob/master/README.md).
+// Install VSCode Live Server. Check it out at https://github.com/ritwickdey/vscode-live-server/blob/master/README.md.
 
 
 // The server will start at http://127.0.0.1:5500/
